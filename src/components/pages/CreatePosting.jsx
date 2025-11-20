@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router';
 
 
 export default function CreatePosting() {
-
+    useEffect(() => {
+        document.title = "ReWorkeDay | Create Posting";
+    }, []);
     
     return (
         <div>

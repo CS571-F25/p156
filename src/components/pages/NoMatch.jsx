@@ -1,6 +1,12 @@
 import { Link } from "react-router";
+import { useEffect } from "react";
 
 function NoMatch() {
+
+    useEffect(() => {
+        document.title = "ReWorkeDay | Ruh oh!";
+    }, []);
+
     return (
         <div className="p-5">
             <h2>404</h2>

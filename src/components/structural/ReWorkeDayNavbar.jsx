@@ -40,13 +40,6 @@ export default function ReWorkeDayNavbar(props) {
                             <Button variant="outline-success" as={Link} to="login">Login</Button>
                         </>
                     }
-                    {/* <NavDropdown title="Chatrooms"> */}
-                        {/* {
-                            props.chatrooms.map(rm => {
-                                return <NavDropdown.Item key={rm} as={Link} to={"chatrooms/" + rm}>{rm}</NavDropdown.Item>
-                            })
-                        } */}
-                    {/* </NavDropdown> */}
                 </Nav>
                 </Navbar.Collapse>
             </Container>

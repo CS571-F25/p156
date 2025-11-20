@@ -4,8 +4,8 @@ import { HashRouter, Route, Routes } from 'react-router';
 
 
 import ReWorkeDayLayout from './components/structural/ReWorkeDayLayout'
-import ReWorkeDayHome from './components/structural/ReWorkeDayHome'
-import NoMatch from './components/NoMatch'
+import ReWorkeDayHome from './components/pages/ReWorkeDayHome'
+import NoMatch from './components/pages/NoMatch'
 import ReWorkeDayLogin from './components/auth/ReWorkeDayLogin'
 import ReWorkeDayRegister from './components/auth/ReWorkeDayRegister'
 import ReWorkeDayLogout from './components/auth/ReWorkeDayLogout'

@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router';
 
 export default function OpenRoles() {
 
+    useEffect(() => {
+        document.title = "ReWorkeDay | Open Roles";
+    }, []);
     
     return (
         <div>

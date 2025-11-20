@@ -7,9 +7,13 @@ import ReWorkeDayFooter from "./ReWorkeDayFooter";
 
 function ReWorkeDayLayout(props) {
     return (
-        <div>
+        <div className="d-flex flex-column min-vh-100">
             <ReWorkeDayNavbar />
-            <Outlet />
+
+                <div className="flex-grow-1 d-flex">
+                    <Outlet />
+                </div>
+
             <ReWorkeDayFooter />
         </div>
     );
