@@ -31,13 +31,13 @@ export default function ReWorkeDayNavbar(props) {
                     {
                         JSON.parse(loginStatus).isLoggedIn ? 
                         <>
-                            <Nav.Link as={Link} to="submitted">My Applications</Nav.Link>
+                            <Nav.Link as={Link} to="/submitted">My Applications</Nav.Link>
                             <Button variant="outline-danger" as={Link} to="logout">Logout</Button>
                         </>
                         : 
                         <>
-                            <Nav.Link as={Link} to="register">Register</Nav.Link>
-                            <Button variant="outline-success" as={Link} to="login">Login</Button>
+                            <Nav.Link as={Link} to="/register">Register</Nav.Link>
+                            <Button variant="outline-success" as={Link} to="/login">Login</Button>
                         </>
                     }
                 </Nav>

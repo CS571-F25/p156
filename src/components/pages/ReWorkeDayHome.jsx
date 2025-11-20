@@ -43,17 +43,18 @@ function ReWorkeDayHome () {
             </Container>
 
             <Container className="justify-content-center">
-            <Row>
-                <Col>
+                <Row className="justify-content-center">
+                <Col className="d-flex justify-content-center mb-3">
                     <Card>
                         <Card.Body>
                             <Card.Title>Lorem ipsum</Card.Title>
                             <Card.Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien diam, maximus quis enim ut, vehicula convallis dui. Donec placerat, ligula eu euismod vehicula, dolor lorem condimentum odio, sed elementum ligula tellus nec diam. Phasellus aliquam magna sit amet mi pellentesque pretium. Nulla turpis lectus, imperdiet id eleifend id, scelerisque id nisi. Quisque vehicula accumsan augue. Donec iaculis nulla at ipsum consequat eleifend. Donec consectetur nisl leo, in gravida nunc pharetra eu. Vestibulum aliquet et velit iaculis gravida. Phasellus a convallis sapien. Curabitur at posuere neque.</Card.Text>
                         </Card.Body>
+                        <Card.Footer>Wassup</Card.Footer>
                     </Card>
                 </Col>
 
-                <Col>
+                <Col className="d-flex justify-content-center mb-3">
                     <Image src={landingimg} />
                 </Col>
 

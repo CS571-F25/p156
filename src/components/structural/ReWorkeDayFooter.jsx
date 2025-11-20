@@ -18,16 +18,16 @@ export default function ReWorkeDayFooter() {
             <Nav className="me-auto">
               <Container>
                 <Row>
-                  <Col as={Link} to="" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }} target="_blank" rel="noopener noreferrer" >
+                  <Col as={Link} to="/about" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }}>
                     <i className="bi bi-patch-question-fill"/> About
                   </Col>
-                  <Col as={Link} to="" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }} target="_blank" rel="noopener noreferrer" >
+                  <Col as={Link} to="/recruitment/home" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }}>
                     <i className="bi bi-person-fill-lock"/> Recruiters
                   </Col>
-                  <Col as={Link} to="" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }} target="_blank" rel="noopener noreferrer" >
+                  <Col as={Link} to="/submitted" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }} >
                     <i className="bi bi-send-plus"/> Applicants
                   </Col>
-                  <Col as={Link} to="" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }}>
+                  <Col as={Link} to="https://github.com/CS571-F25/p156" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }}>
                     <i className="bi bi-github"/> GitHub
                   </Col>
                 </Row>
