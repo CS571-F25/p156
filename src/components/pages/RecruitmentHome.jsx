@@ -11,7 +11,10 @@ export default function RecruitmentHome() {
 
     
     return (
-        <Container className='flex-grow-1'>
+        // might change just to flex-grow-1
+        <>
+        <Button className="d-flex justify-content-center align-items-center" as={Link} to="/recruitment/create" variant="primary">Create Posting</Button>
+        <Container className='d-flex flex-grow-1 justify-content-center'>
             <Row>
                 {items.map((_, index) => (
                     <Col xs={12} sm={12} md={6} lg={3} xl={4} className='p-2'>
@@ -20,5 +23,6 @@ export default function RecruitmentHome() {
                 ))}
             </Row>
         </Container>
+        </>
     )
 }
