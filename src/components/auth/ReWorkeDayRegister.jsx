@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
-import { useNavigate } from 'react-router';
+import { Form, Container, Card, Row, Col } from "react-bootstrap";
+import { useNavigate, Link } from 'react-router';
 import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
@@ -137,11 +137,12 @@ export default function ReWorkeDayRegister() {
                     {
                         tip[0] ?
                             <Card.Footer>
-                                <p className="text-center" style={{color: "blue"}}>{tip[1]}</p>
+                                <p className="text-center" style={{color: "blue"}}> {tip[1]} </p>
+                                <Link className="d-block text-center" as={Link} to="/login">Take me there!</Link>
                             </Card.Footer>
                             :
                             <></>
-                    }                    
+                    }
                 </Card>
             </Col>
         </Row>
