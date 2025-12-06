@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import { useNavigate, Link } from 'react-router';
 
 import { useUser } from '../contexts/SignedInStatus'
@@ -20,8 +20,16 @@ export default function ReWorkeDayLogout() {
         })
     }, []);
 
-    return <Container>
-        <p>{n ? n : "Hey"}, you have been logged out</p>
-        <p>Didn't mean that? <Link as={Link} to="/login">Log in again</Link></p>    
+    return <Container 
+                className="d-flex justify-content-center"
+                style={{ paddingTop: "5rem" }}  
+            >
+        <Card style={{width: "18rem"}}>
+            <Card.Body>
+                <Card.Title>Success!</Card.Title>
+                <Card.Text>{n ? n : "Hey"}, you have been logged out</Card.Text>
+            </Card.Body>
+            <Card.Footer>Didn't mean that? <Link as={Link} to="/login">Log in again</Link></Card.Footer> 
+        </Card>
     </Container>
 }
