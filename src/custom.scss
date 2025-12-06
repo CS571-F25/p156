@@ -1,0 +1,29 @@
+// ------------------------------------------------------------
+// Bootstrap — MUST come first, theme overrides go inside `with`
+// ------------------------------------------------------------
+@use "bootstrap/scss/bootstrap" with (
+  $primary: #763E0C,
+  $dark: #a6cdf2
+);
+
+// ------------------------------------------------------------
+// Google Fonts — loaded after Bootstrap
+// ------------------------------------------------------------
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+// ------------------------------------------------------------
+// Custom styles
+// ------------------------------------------------------------
+$siteBackground: #edf5fc;
+
+$nabla-font: "Nabla", monospace;
+$main-font: "Nunito", sans-serif;
+
+body {
+  font-family: $main-font !important;
+}
+
+.siteBackground {
+  background-color: $siteBackground;
+}

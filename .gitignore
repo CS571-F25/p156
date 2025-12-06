@@ -1,7 +1,7 @@
 # Suff I added
 .DS_*
 .env
-
+firebase.js
 
 # Logs
 logs

@@ -15,6 +15,7 @@
     "bootstrap-icons": "^1.13.1",
     "firebase": "^12.6.0",
     "framer-motion": "^12.23.24",
+    "motion": "^12.23.24",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",
@@ -29,6 +30,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
+    "sass": "^1.94.2",
     "vite": "^7.1.7"
   }
 }

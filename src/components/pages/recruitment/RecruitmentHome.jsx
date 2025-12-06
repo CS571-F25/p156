@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState, useContext } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from 'react-router';
-import PendingApplication from '../structural/PendingApplication';
+import PendingApplication from '../../structural/PendingApplication';
 
 
 
