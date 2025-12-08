@@ -21,7 +21,7 @@ export default function OpenRoles() {
             const data = querySnapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
-            }));      
+            }));
             setPostedApplications(data)
         }
 
@@ -33,12 +33,15 @@ export default function OpenRoles() {
         <Container className="py-4">
             <Row>
                 {postedApplications.map((item, v) => {
-                    return <Col md={4}>
-                        <Role key={v} {...item}/>
+                    let forwardData = item.postingDetails[0]
+                    console.log(forwardData)
+                    return <Col key={v+10} md={4}>
+                        <Role key={v} {...forwardData}/>
                     </Col>
                 })
                 }
             </Row>
+            {/* <Button onClick={() => console.log(postedApplications)}>Developer mode</Button> */}
         </Container>
     );
 }

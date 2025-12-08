@@ -3,6 +3,8 @@ import { Container, Row, Col, Form, Button, Card, Dropdown } from "react-bootstr
 import Constants from "../../Constants";
 import { Link } from "react-router"
 import { useUser } from "../contexts/SignedInStatus";
+import { db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Posting() {
     const templates = {
@@ -88,15 +90,17 @@ export default function Posting() {
         setFields(templates[name] || []);
     };
 
-    // const handleResetPage = () => {
-    //     setFields([]);
-    //     setPostingDetails([]);
-    //     setFirstStep(false);
-    //     setCanPublish(false);
-    // }
+    const handlePublishPost = async () => {
+        const jobId = crypto.randomUUID();
+
+        await setDoc(doc(db, "posted-applications", jobId), {
+            postingDetails,
+            applicationFields: fields
+        });
+    };
 
     const getEmployeeType = (v) => {
-        if (v === Constants.employeeType.FullTime) {return "HELP HELP HELP"}
+        if (v === Constants.employeeType.FullTime) {return "Full Time"}
         else if (v === Constants.employeeType.PartTime) {return "Part Time"}
         else if (v === Constants.employeeType.Intern) {return "Internship"}
         else if (v === Constants.employeeType.Contract) {return "Contract"}
@@ -398,7 +402,7 @@ export default function Posting() {
             
             <Container className="mt-3 text-end">
                 <Button as={Link} to="/recruitment/home" className="me-md-3" variant="danger">Close and Delete</Button>
-                {firstStep ? <Button onClick={() => alert("I should publish this job posting!")} disabled={!canPublish && !fields.length>0} variant="success">Publish</Button> : <></>}
+                {firstStep ? <Button onClick={handlePublishPost} disabled={!canPublish && !fields.length>0} variant="success">Publish</Button> : <></>}
             </Container> 
             <Button onClick={()=>{console.log(fields);console.log(postingDetails)}}>Print Dev Info</Button>
         </Container>
