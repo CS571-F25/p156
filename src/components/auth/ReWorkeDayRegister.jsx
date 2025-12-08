@@ -3,10 +3,10 @@ import { useEffect, useState, useContext } from "react";
 import { Form, Container, Card, Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from 'react-router';
 import { collection, setDoc, doc, getDoc } from "firebase/firestore";
+import { app, db } from "../../firebase"; 
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { getAuth, signInWithCredential, GoogleAuthProvider } from "firebase/auth";
-import { app, db } from "../../firebase"; 
 import { useUser } from "../contexts/SignedInStatus";
 
 
