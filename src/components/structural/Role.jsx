@@ -1,11 +1,15 @@
 import React from "react";
-import { Card, Col, Button } from "react-bootstrap";
+import { Card, Col, Button, Modal, Container, Form } from "react-bootstrap";
+import { useState } from "react"
 import Constants from "../../Constants";
 
 export default function Role(props) {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-    const date = props.posted.toDate()
-    const formatted = props.posted.toDate().toLocaleDateString("en-US", {
+
+    const formatted = props.postingDetails[0].posted.toDate().toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -20,19 +24,73 @@ export default function Role(props) {
     }
 
     return (
-        <Card>
-            {console.log(props.posted)}
-            <Card.Body>
-                <Card.Title>{props.position}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                    Posted: {formatted}
-                </Card.Subtitle>
-                <Card.Text>
-                    Position Type: <strong>{getEmployeeType(props.empType)}</strong>
-                </Card.Text>
-                
-                <Button variant="success" onClick={() => alert("i should apply to this position!")}>Apply!</Button>
-            </Card.Body>
-        </Card>
+        <>
+            <Modal show={show} onHide={handleClose} size="xl" backdrop="static">
+                <Modal.Header closeButton>
+                <Modal.Title>Application</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        {
+                            props.postingDetails.map((d, i) => {
+                                return <Container key={i}>
+                                    <h1>{d.position}</h1>
+                                    <p><em>{getEmployeeType(d.empType)} Position</em></p>
+                                    <p>Location(s): {d.locations}</p>
+                                    <p>{d.summary}</p>
+                                    {d.minQ ? <div><p className="fw-bold">Minimum Qualifications:</p><p>{d.minQ}</p></div> : <></>}
+                                    {d.prefQ ? <div><p className="fw-bold">Preferred Qualifications:</p><p>{d.prefQ}</p></div> : <></>}
+                                </Container>
+                            })
+                        }
+                    </Container>
+                    <hr className="border-2 border-top border-primary" />
+
+                    <Form>
+                        {props.applicationFields.map((f, i) => {
+                            if (f.input === "checkbox") {
+                                return (
+                                    <Form.Group className="mb-5" key={i}>
+                                        <div className="d-flex align-items-center mb-2">
+                                            <Form.Label className="me-3">{f.label}</Form.Label>
+                                            <Form.Check className="mb-2" type="checkbox"/>
+                                        </div>
+                                    </Form.Group>
+                                );
+                            } else {
+                                return (
+                                    <Form.Group className="mb-5" key={i}>
+                                        <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                        {f.input==="textarea" ? <Form.Control className="mb-3" as={f.input} required={f.required}/> : <Form.Control className="mb-3" type={f.input} required={f.required}/>}
+                                    </Form.Group>
+                                );
+                            }
+                        })}
+                    </Form>
+
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                    Submit!
+                </Button>
+                </Modal.Footer>
+            </Modal>
+            <Card>
+                <Card.Body>
+                    <Card.Title>{props.postingDetails[0].position}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">
+                        Posted: {formatted}
+                    </Card.Subtitle>
+                    <Card.Text>
+                        Position Type: <strong>{getEmployeeType(props.postingDetails[0].empType)}</strong>
+                    </Card.Text>
+                    
+                    <Button variant="success" onClick={handleShow}>Apply!</Button>
+                </Card.Body>
+            </Card>
+        </>
   );
 }

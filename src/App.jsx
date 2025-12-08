@@ -16,7 +16,6 @@ import ReWorkeDayLogout from './components/auth/ReWorkeDayLogout'
 
 import ApplicantHome from './components/pages/applicant/ApplicantHome';
 import SubmittedApplications from './components/pages/applicant/SubmittedApplications';
-import Apply from './components/pages/applicant/Apply';
 
 import CreatePosting from './components/pages/recruitment/CreatePosting';
 import RecruitmentHome from './components/pages/recruitment/RecruitmentHome';
@@ -46,7 +45,6 @@ function App() {
           <Route path="/applicant" element={<ReWorkeDayLayout />}>
             <Route path="/applicant/home" element={<ApplicantHome/>}/>
             <Route path="/applicant/submitted" element={<SubmittedApplications />}/>
-            <Route path="/applicant/apply" element={<Apply/>}/>
           </Route>          
         </Routes>
       </HashRouter>

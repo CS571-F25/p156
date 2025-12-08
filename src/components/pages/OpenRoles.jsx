@@ -33,10 +33,8 @@ export default function OpenRoles() {
         <Container className="py-4">
             <Row>
                 {postedApplications.map((item, v) => {
-                    let forwardData = item.postingDetails[0]
-                    console.log(forwardData)
                     return <Col key={v+10} md={4}>
-                        <Role key={v} {...forwardData}/>
+                        <Role key={v} {...item}/>
                     </Col>
                 })
                 }
