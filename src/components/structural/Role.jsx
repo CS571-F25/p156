@@ -3,6 +3,9 @@ import { Card, Col, Button, Modal, Container, Form } from "react-bootstrap";
 import { useState } from "react"
 import Constants from "../../Constants";
 import Markdown from "react-markdown";
+import { db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+
 
 export default function Role(props) {
     // Modal state variables
@@ -26,8 +29,15 @@ export default function Role(props) {
         else if (v === Constants.employeeType.Other) {return "Other"}
     }
 
-    const handleSubmitFinalApplication = () => {
-        console.log(formValues)
+    const handleSubmitFinalApplication = async () => {
+        // write to props.id
+        const individualApplicationID = crypto.randomUUID();
+        const jobID = props.id;
+        setFormValues({ ...formValues, "XX-submittedTimeStamp": new Date(), });
+
+        await setDoc(doc(db, "submitted-applications", jobID, "recieved-applications", individualApplicationID), {
+            formValues
+        })
     }
 
     return (
