@@ -31,9 +31,11 @@ export default function OpenRoles() {
     
     return (
         <Container className="py-4">
-            <Row>
+            <h1 className='text-center pb-2'>Open Roles</h1>
+            <Card className="mb-5" style={{height: "5rem"}} />
+            <Row className="gy-3">
                 {postedApplications.map((item, v) => {
-                    return <Col key={v+10} md={4}>
+                    return <Col key={v+10} xs={6} md={4}>
                         <Role key={v} {...item}/>
                     </Col>
                 })

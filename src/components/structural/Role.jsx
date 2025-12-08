@@ -5,10 +5,12 @@ import Constants from "../../Constants";
 import Markdown from "react-markdown";
 
 export default function Role(props) {
+    // Modal state variables
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [formValues, setFormValues] = useState({});
 
     const formatted = props.postingDetails[0].posted.toDate().toLocaleDateString("en-US", {
         year: "numeric",
@@ -22,6 +24,10 @@ export default function Role(props) {
         else if (v === Constants.employeeType.Intern) {return "Internship"}
         else if (v === Constants.employeeType.Contract) {return "Contract"}
         else if (v === Constants.employeeType.Other) {return "Other"}
+    }
+
+    const handleSubmitFinalApplication = () => {
+        console.log(formValues)
     }
 
     return (
@@ -54,7 +60,7 @@ export default function Role(props) {
                                     <Form.Group className="mb-5" key={i}>
                                         <div className="d-flex align-items-center mb-2">
                                             <Form.Label className="me-3">{f.label}</Form.Label>
-                                            <Form.Check className="mb-2" type="checkbox"/>
+                                            <Form.Check className="mb-2" type="checkbox" checked={!!formValues[f.label]} onChange={(e) => setFormValues({...formValues, [f.label]: e.target.checked})}/>
                                         </div>
                                     </Form.Group>
                                 );
@@ -62,7 +68,10 @@ export default function Role(props) {
                                 return (
                                     <Form.Group className="mb-5" key={i}>
                                         <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
-                                        {f.input==="textarea" ? <Form.Control className="mb-3" as={f.input} required={f.required}/> : <Form.Control className="mb-3" type={f.input} required={f.required}/>}
+                                        {f.input==="textarea" ? 
+                                            <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} as={f.input} required={f.required}/>
+                                            :
+                                            <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} type={f.input} required={f.required}/>}
                                     </Form.Group>
                                 );
                             }
@@ -71,10 +80,10 @@ export default function Role(props) {
 
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="outline-secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleSubmitFinalApplication}>
                     Submit!
                 </Button>
                 </Modal.Footer>
