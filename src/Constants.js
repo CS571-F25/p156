@@ -6,7 +6,14 @@ const Constants = {
     ApplicationStatus: {
         UnderReview: "1",
         Rejected: "2",
-        Accepted: "3"
+        Accepted: "3",
+    },
+    employeeType: {
+        FullTime: "1",
+        PartTime: "2",
+        Intern: "3",
+        Contract: "4",
+        Other: "5",
     }
 }
 

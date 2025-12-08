@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card, Dropdown } from "react-bootstrap";
+import Constants from "../../Constants";
+import { Link } from "react-router"
 
 export default function Posting() {
     const templates = {
         "Standard Employee": [
-            { type: "info", label: "Introduction", description: "this would be a summary!", input: "none", required: false},
             { type: "form", label: "First Name", description: "", input: "text", required: true},
             { type: "form", label: "Last Name", description: "", input: "text", required: true},
             { type: "form", label: "Preferred Name", description: "", input: "text", required: true},
@@ -19,7 +20,6 @@ export default function Posting() {
             { type: "form", label: "Message to hiring team", description: "", input:"textarea", required: false},
         ],
         Intern: [
-            { type: "info", label: "Introduction", description: "this would be a summary!", input: "none", required: false},
             { type: "form", label: "First Name", description: "", input: "text", required: true},
             { type: "form", label: "Last Name", description: "", input: "text", required: true},
             { type: "form", label: "Preferred Name", description: "", input: "text", required: true},
@@ -34,7 +34,6 @@ export default function Posting() {
             { type: "form", label: "Message to hiring team", description: "", input:"textarea", required: false},
         ],
         Contract: [
-            { type: "info", label: "Introduction", description: "this would be a summary!", input: "none", required: false},
             { type: "form", label: "First Name", description: "", input: "text", required: true},
             { type: "form", label: "Last Name", description: "", input: "text", required: true},
             { type: "form", label: "Preferred Name", description: "", input: "text", required: true},
@@ -46,11 +45,18 @@ export default function Posting() {
             { type: "form", label: "Message to hiring team", description: "", input:"textarea", required: false},
         ], 
     };
-    
+
     const [fields, setFields] = useState([]);
+    const [postingDetails, setPostingDetails] = useState([]);
+
+    const [positionName, setPositionName] = useState("");
     const [empType, setEmpType] = useState("");
+    const [summary, setSummary] = useState("");
+    const [locations, setLocations] = useState("");
     const [minQ, setMinQ] = useState(false);
+    const [minQText, setMinQText] = useState("");
     const [prefQ, setPrefQ] = useState(false);
+    const [prefQText, setPrefQText] = useState("");
 
     const [newFieldLabel, setNewFieldLabel] = useState("");
     const [newFieldDescription, setNewFieldDescription] = useState("");
@@ -58,6 +64,7 @@ export default function Posting() {
     const [newFieldRequired, setNewFieldRequired] = useState(false);
     
     const [canPublish, setCanPublish] = useState(fields.length !== 0);
+    const [firstStep, setFirstStep] = useState(false);
 
     const addField = () => {
         if (!newFieldLabel.trim()) return;
@@ -68,14 +75,30 @@ export default function Posting() {
         setNewFieldRequired(false);
         setCanPublish(true);
     };
-    
-    const removeField = () => {
-        
+
+    const addToPostingDetails = () => {
+        setPostingDetails([...postingDetails, {type: "info", "position": positionName, "empType": empType, "summary": summary, "locations": locations, "minQ": minQText, "prefQ": prefQText}])
+        setFirstStep(true);
     }
 
     const loadTemplate = (name) => {
         setFields(templates[name] || []);
     };
+
+    // const handleResetPage = () => {
+    //     setFields([]);
+    //     setPostingDetails([]);
+    //     setFirstStep(false);
+    //     setCanPublish(false);
+    // }
+
+    const getEmployeeType = (v) => {
+        if (v === Constants.employeeType.FullTime) {return "HELP HELP HELP"}
+        else if (v === Constants.employeeType.PartTime) {return "Part Time"}
+        else if (v === Constants.employeeType.Intern) {return "Internship"}
+        else if (v === Constants.employeeType.Contract) {return "Contract"}
+        else if (v === Constants.employeeType.Other) {return "Other"}
+    }
 
     const handleRemove = () => {
 
@@ -106,7 +129,10 @@ export default function Posting() {
                             <div className="mb-4">
                                 <Form.Label>Position Name</Form.Label>
                                 <Form.Control
+                                    disabled={postingDetails.length>0}
                                     placeholder="e.g. Cybersecurity Intern"
+                                    value={positionName}
+                                    onChange={(e) => setPositionName(e.target.value)}
                                 />
                             </div>
                         </Form.Group>
@@ -116,16 +142,17 @@ export default function Posting() {
                                 <Form.Label>Employment Type</Form.Label>
                                 <Form.Select
                                     value={empType}
-                                    onChange={(e) => setEmpType(e.target.value)}
+                                    disabled={postingDetails.length>0}
+                                    onChange={(e) => {setEmpType(e.target.value); console.log(empType)}}
                                 >
                                     <option value="" disabled>
                                         Select an employment type
                                     </option>
-                                    <option value="1">Full Time</option>
-                                    <option value="2">Part Time</option>
-                                    <option value="3">Internship</option>
-                                    <option value="4">Contract</option>
-                                    <option value="5">Other</option>
+                                    <option value={Constants.employeeType.FullTime}>Full Time</option>
+                                    <option value={Constants.employeeType.PartTime}>Part Time</option>
+                                    <option value={Constants.employeeType.Intern}>Internship</option>
+                                    <option value={Constants.employeeType.Contract}>Contract</option>
+                                    <option value={Constants.employeeType.Other}>Other</option>
                                 </Form.Select>
                             </div>
                         </Form.Group>
@@ -134,6 +161,9 @@ export default function Posting() {
                             <div className="mb-4">
                                 <Form.Label>Summary</Form.Label>
                                 <Form.Control
+                                    disabled={postingDetails.length>0}
+                                    value={summary}
+                                    onChange={(e) => setSummary(e.target.value)}
                                     placeholder="Write a summary of what applicants can expect the job to entail!"
                                     as="textarea"
                                     className="w-100"
@@ -146,6 +176,9 @@ export default function Posting() {
                             <div className="mb-4">
                                 <Form.Label>Location(s)</Form.Label>
                                 <Form.Control
+                                    disabled={postingDetails.length>0}
+                                    value={locations}
+                                    onChange={(e) => setLocations(e.target.value)}
                                     placeholder="e.g. Madison, WI, New York, NY, Houston, TX"
                                 />
                             </div>
@@ -155,7 +188,10 @@ export default function Posting() {
                             <div className="d-flex align-items-center mb-2">
                                 <Form.Label className="me-3">Add minimum qualifications?</Form.Label>
                                 <Form.Check
+                                    disabled={postingDetails.length>0}
                                     type="checkbox"
+                                    checked={minQ}
+                                    value={minQ}
                                     onChange={() => setMinQ(prev => !prev)}
                                 />
                             </div>
@@ -164,9 +200,12 @@ export default function Posting() {
                                 <div className="mb-4">
                                     <Form.Label>Minimum Qualifications</Form.Label>
                                     <Form.Control
+                                        disabled={postingDetails.length>0}
                                         className="align-middle"
                                         placeholder="e.g. willingness to learn!"
                                         as="textarea"
+                                        value={minQText}
+                                        onChange={(e) => setMinQText(e.target.value)}                                        
                                     />
                                 </div>
                                 :
@@ -178,7 +217,10 @@ export default function Posting() {
                             <div className="d-flex align-items-center mb-2">
                                 <Form.Label className="me-3">Add preferred qualifications?</Form.Label>
                                 <Form.Check
+                                    disabled={postingDetails.length>0}
                                     type="checkbox"
+                                    checked={prefQ}
+                                    value={prefQ}
                                     onChange={() => setPrefQ(prev => !prev)}
                                 />
                             </div>
@@ -187,10 +229,13 @@ export default function Posting() {
                                 prefQ ?
                                 <div className="mb-4">
                                     <Form.Label>Preferred Qualifications</Form.Label>
-                                    <Form.Control
+                                    <Form.Control                                    
+                                        disabled={postingDetails.length>0}
                                         className="align-middle"
                                         placeholder="e.g. penetration testing, database security"
                                         as="textarea"
+                                        value={prefQText}
+                                        onChange={(e) => setPrefQText(e.target.value)}
                                     />
                                 </div>
                                 :
@@ -199,12 +244,23 @@ export default function Posting() {
                         </Form.Group>
                     </Col>
                 </Row>
+                {/* <Row> */}
+                    {/* <Col md={1}> */}
+                        <Button disabled={!positionName || !summary || !empType || !locations || postingDetails.length>0} onClick={addToPostingDetails}>Save</Button>
+                    {/* </Col> */}
+                    {/* <Col md={1}>
+                        <Button disabled={!positionName || !summary || !empType || !locations || postingDetails.length>0} onClick={addToPostingDetails}>Save</Button>
+                    </Col>                     */}
+                {/* </Row> */}
             </Card>
-
-            <Card className="p-3 mb-4">
+            
+            { firstStep ?
+            <Card className="mb-4">
+                <Card.Body>
                 <Row>
-                    <Col md={6}>
+                    <Col>
                     <h3>Import Template</h3>
+                    <Card.Text>Low on time? Use one of our carefully crafted templates that will keep applicants happy and get all the information you need!</Card.Text>
                     <Dropdown>
                         <Dropdown.Toggle>Select Template</Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -217,9 +273,14 @@ export default function Posting() {
                     </Dropdown>
                     </Col>
                 </Row>
-            </Card>
+                </Card.Body>
+                <Card.Footer>You can always modify an imported template!</Card.Footer>
+            </Card> :<>
+            <Card className="mb-4"><Card.Body className="text-center">Fill out all the details above and click save to see the rest of the field builder</Card.Body></Card>
+            </>}
             
             
+            { firstStep ? 
             <Card className="p-3 mb-4">
                 <h3>Add New Field</h3>
                     <Container>
@@ -278,47 +339,65 @@ export default function Posting() {
                     </Container>
 
                     <Container>
-                        <Button className="w-100" onClick={addField}>Add Field</Button>
+                        <Button className="w-100" disabled={!newFieldLabel || !newFieldType} onClick={addField}>Add Field</Button>
                     </Container>
-            </Card>
+            </Card> : <></>}
             </Form>
             
+            { firstStep ?
             <Card className="p-3">
-                <h3>Preview Posting</h3>
-                {fields.length === 0 && <p className="text-muted">No fields added yet.</p>}
+                <h3 className="text-center">Preview Job Posting</h3>
+                {fields.length === 0 && postingDetails.length == 0&& <p className="text-muted">No fields added yet.</p>}
+                <Container>
+                    {
+                        postingDetails.map((d, i) => {
+                            return <Container key={i}>
+                                <h1>{d.position}</h1>
+                                <p><em>{getEmployeeType(d.empType)} Position</em></p>
+                                <p>Location(s): {d.locations}</p>
+                                <p>{d.summary}</p>
+                                {d.minQ ? <div><p className="fw-bold">Minimum Qualifications:</p><p>{d.minQ}</p></div> : <></>}
+                                {d.prefQ ? <div><p className="fw-bold">Preferred Qualifications:</p><p>{d.prefQ}</p></div> : <></>}
+                            </Container>
+                        })
+                    }
+                </Container>
+                <hr className="border-2 border-top border-primary" />
+
                 <Form>
                     {fields.map((f, i) => {
                         if (f.input === "checkbox") {
                             return (
-                                <Form.Group className="mb-3" key={i}>
+                                <Form.Group className="mb-5" key={i}>
                                     <div className="d-flex align-items-center mb-2">
                                         <Form.Label className="me-3">{f.label}</Form.Label>
                                         <Form.Check className="mb-2" type="checkbox"/>
                                     </div>
-                                    <Button onClick={handleRemove} disabled variant="outline-danger">Remove Field</Button>
-                                    <Button onClick={handleMoveUp} disabled={i===0} variant="secondary">Move Up</Button>
+                                    <Button className="me-3" onClick={handleRemove} disabled variant="outline-danger">Remove Field</Button>
+                                    <Button className="me-3" onClick={handleMoveUp} disabled={i===0} variant="secondary">Move Up</Button>
                                     <Button onClick={handleMoveDown} disabled={fields.length-1===i} variant="secondary">Move Down</Button>
                                 </Form.Group>
                             );
                         } else {
                             return (
-                                <Form.Group className="mb-3" key={i}>
-                                    <Form.Label>{f.label}</Form.Label>
-                                    <Form.Control disabled placeholder={`The applicant's response to \"${f.label}\"`} type={f.input} required={f.required}/>
-                                    <Button onClick={handleRemove} disabled variant="outline-danger">Remove Field</Button>
-                                    <Button onClick={handleMoveUp} disabled={i===0} variant="secondary">Move Up</Button>
+                                <Form.Group className="mb-5" key={i}>
+                                    <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                    <Form.Control className="mb-3" disabled placeholder={`The applicant's response to \"${f.label}\"`} type={f.input} required={f.required}/>
+                                    <Button className="me-3" onClick={handleRemove} disabled variant="outline-danger">Remove Field</Button>
+                                    <Button className="me-3" onClick={handleMoveUp} disabled={i===0} variant="secondary">Move Up</Button>
                                     <Button onClick={handleMoveDown} disabled={fields.length-1===i} variant="secondary">Move Down</Button>
                                 </Form.Group>
                             );
                         }
                     })}
                 </Form>
-            </Card>
+            </Card> : <></>}
             
             <Container className="mt-3 text-end">
-                <Button className="me-md-3" variant="danger">Close and Delete</Button>
-                <Button disabled={!canPublish} variant="success">Publish</Button>
-            </Container>
+                <Button as={Link} to="/recruitment/home" className="me-md-3" variant="danger">Close and Delete</Button>
+                {firstStep ? <Button onClick={() => alert("I should publish this job posting!")} disabled={!canPublish && !fields.length>0} variant="success">Publish</Button> : <></>}
+            </Container> 
+            <Button onClick={()=>{console.log(fields);console.log(postingDetails)}}>Print Dev Info</Button>
         </Container>
   );
 }
