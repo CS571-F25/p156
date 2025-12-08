@@ -5,6 +5,8 @@ import { Link } from "react-router"
 import { useUser } from "../contexts/SignedInStatus";
 import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import Markdown from 'react-markdown'
+
 
 export default function Posting() {
     const templates = {
@@ -176,6 +178,7 @@ export default function Posting() {
                                     className="w-100"
                                     rows={4}
                                 />
+                                <p className="text-muted"><Link to="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener noreferrer">Markdown</Link> formatting IS supported!</p>
                             </div>
                         </Form.Group>
 
@@ -214,6 +217,7 @@ export default function Posting() {
                                         value={minQText}
                                         onChange={(e) => setMinQText(e.target.value)}                                        
                                     />
+                                    <sub>Markdown is also supported!</sub>
                                 </div>
                                 :
                                 <></>
@@ -244,6 +248,7 @@ export default function Posting() {
                                         value={prefQText}
                                         onChange={(e) => setPrefQText(e.target.value)}
                                     />
+                                    <sub>Markdown is also supported!</sub>
                                 </div>
                                 :
                                 <></>
@@ -253,7 +258,7 @@ export default function Posting() {
                 </Row>
                 {/* <Row> */}
                     {/* <Col md={1}> */}
-                        <Button disabled={!positionName || !summary || !empType || !locations || postingDetails.length>0} onClick={addToPostingDetails}>Save</Button>
+                        <Button disabled={!positionName || !summary || !empType || !locations || postingDetails.length>0} onClick={addToPostingDetails}>Continue</Button>
                     {/* </Col> */}
                     {/* <Col md={1}>
                         <Button disabled={!positionName || !summary || !empType || !locations || postingDetails.length>0} onClick={addToPostingDetails}>Save</Button>
@@ -283,7 +288,7 @@ export default function Posting() {
                 </Card.Body>
                 <Card.Footer>You can always modify an imported template!</Card.Footer>
             </Card> :<>
-            <Card className="mb-4"><Card.Body className="text-center">Fill out all the details above and click save to see the rest of the field builder</Card.Body></Card>
+            <Card className="mb-4"><Card.Body className="text-center">Fill out all the details above and click continue to see the rest of the field builder</Card.Body></Card>
             </>}
             
             
@@ -362,7 +367,7 @@ export default function Posting() {
                                 <h1>{d.position}</h1>
                                 <p><em>{getEmployeeType(d.empType)} Position</em></p>
                                 <p>Location(s): {d.locations}</p>
-                                <p>{d.summary}</p>
+                                <Markdown>{d.summary}</Markdown>
                                 {d.minQ ? <div><p className="fw-bold">Minimum Qualifications:</p><p>{d.minQ}</p></div> : <></>}
                                 {d.prefQ ? <div><p className="fw-bold">Preferred Qualifications:</p><p>{d.prefQ}</p></div> : <></>}
                             </Container>

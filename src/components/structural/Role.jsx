@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Col, Button, Modal, Container, Form } from "react-bootstrap";
 import { useState } from "react"
 import Constants from "../../Constants";
+import Markdown from "react-markdown";
 
 export default function Role(props) {
     const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ export default function Role(props) {
         <>
             <Modal show={show} onHide={handleClose} size="xl" backdrop="static">
                 <Modal.Header closeButton>
-                <Modal.Title>Application</Modal.Title>
+                <Modal.Title>Your Application</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
@@ -37,9 +38,9 @@ export default function Role(props) {
                                     <h1>{d.position}</h1>
                                     <p><em>{getEmployeeType(d.empType)} Position</em></p>
                                     <p>Location(s): {d.locations}</p>
-                                    <p>{d.summary}</p>
-                                    {d.minQ ? <div><p className="fw-bold">Minimum Qualifications:</p><p>{d.minQ}</p></div> : <></>}
-                                    {d.prefQ ? <div><p className="fw-bold">Preferred Qualifications:</p><p>{d.prefQ}</p></div> : <></>}
+                                    <Markdown>{d.summary}</Markdown>
+                                    {d.minQ ? <><span className="fw-bold">Minimum Qualifications:</span><Markdown>{d.minQ}</Markdown></> : <></>}
+                                    {d.prefQ ? <><span className="fw-bold">Preferred Qualifications:</span><Markdown>{d.prefQ}</Markdown></> : <></>}
                                 </Container>
                             })
                         }
