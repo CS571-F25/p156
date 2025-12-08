@@ -6,6 +6,7 @@ import PendingApplication from '../../structural/PendingApplication';
 import Constants from '../../../Constants';
 
 import { useUser } from "../../contexts/SignedInStatus";
+import AccessDenied from '../AccessDenied';
 
 export default function RecruitmentHome() {
     const items = Array.from({ length: 15 });
@@ -28,16 +29,7 @@ export default function RecruitmentHome() {
                 </Row>
             </Container>
         </> :
-        <>
-            <Container>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Oops</Card.Title>
-                        <Card.Text>This page is only for recruiters, Please try logging in <Link to="/login">here</Link></Card.Text>
-                    </Card.Body>
-                </Card>
-            </Container>
-        </>
+            <AccessDenied role={Constants.Roles.Recruiter}/>
         }
         </>
     )

@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate, Link } from 'react-router';
 import { useUser } from "../../contexts/SignedInStatus";
 import Constants from '../../../Constants';
+import AccessDenied from '../AccessDenied';
 
 
 
@@ -20,21 +21,24 @@ export default function ApplicantHome() {
         <>
         {
         user.role === Constants.Roles.Applicant ?
-            <div>
-                <h1>Applicant Home</h1>
-
-            </div>
-            :
-            <>
             <Container>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Oops</Card.Title>
-                        <Card.Text>This page is only for applicants, please try logging in <Link to="/login">here</Link></Card.Text>
-                    </Card.Body>
-                </Card>
+                <h1 className="display-1 text-center">Applicant Home</h1>
+                <Row>
+                    <Col>
+                        <h2>Your Applications</h2>
+                        <p><span className="text-warning">(status)</span> position name</p>
+                        <p><span className="text-success">(Offer)</span> Software Engineering Intern - Summer</p>
+                        <p><span className="text-muted">(Under Review)</span> Cybersecurity Intern - Summer</p>
+                        <p><span className="text-muted">(Under Review)</span> Product Management Intern - Winter</p>
+                    </Col>
+                    <Col>
+                        <h2>What's new:</h2>
+                    </Col>
+                </Row>
+
             </Container>
-            </>
+            :
+            <AccessDenied role={Constants.Roles.Applicant}/>
         }
         </>
     )

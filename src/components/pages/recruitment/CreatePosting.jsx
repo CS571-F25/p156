@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router';
 import Posting from '../../structural/Posting';
 import { useUser } from "../../contexts/SignedInStatus";
 import Constants from '../../../Constants';
+import AccessDenied from '../AccessDenied';
 
 
 
@@ -28,16 +29,7 @@ export default function CreatePosting() {
 
             </div>
             :
-            <>
-            <Container>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Oops</Card.Title>
-                        <Card.Text>This page is only for recruiters, Please try logging in <Link to="/login">here</Link></Card.Text>
-                    </Card.Body>
-                </Card>
-            </Container>
-            </>
+            <AccessDenied role={Constants.Roles.Recruiter}/>
         }
         </>
     )
