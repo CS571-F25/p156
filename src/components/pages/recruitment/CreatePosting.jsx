@@ -24,7 +24,7 @@ export default function CreatePosting() {
         {
         user.role == Constants.Roles.Recruiter ?
             <div>
-                <h1>Create Posting</h1>
+                <h1 className='text-center display-1'>Create Posting</h1>
                 <Posting/>
 
             </div>
