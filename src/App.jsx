@@ -20,6 +20,8 @@ import SubmittedApplications from './components/pages/applicant/SubmittedApplica
 import CreatePosting from './components/pages/recruitment/CreatePosting';
 import RecruitmentHome from './components/pages/recruitment/RecruitmentHome';
 
+import Constants from './Constants';
+
 import { SignedInStatus } from './components/contexts/SignedInStatus';
 
 function App() {

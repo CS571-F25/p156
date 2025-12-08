@@ -24,7 +24,7 @@ export default function ReWorkeDayFooter() {
                   <Col as={Link} to="/recruitment/home" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }}>
                     <i className="bi bi-person-fill-lock"/> Recruiters
                   </Col>
-                  <Col as={Link} to="/submitted" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }} >
+                  <Col as={Link} to="/applicant/submitted" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }} >
                     <i className="bi bi-send-plus"/> Applicants
                   </Col>
                   <Col as={Link} to="https://github.com/CS571-F25/p156" target="_blank" rel="noopener noreferrer" xs={12} md={6} style={{color: linkColor, textDecoration: "none" }}>
