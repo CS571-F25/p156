@@ -2,6 +2,7 @@ import { use, useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card, Dropdown } from "react-bootstrap";
 import Constants from "../../Constants";
 import { Link } from "react-router"
+import { useUser } from "../contexts/SignedInStatus";
 
 export default function Posting() {
     const templates = {
@@ -46,6 +47,8 @@ export default function Posting() {
         ], 
     };
 
+    const { user, setUser } = useUser();
+
     const [fields, setFields] = useState([]);
     const [postingDetails, setPostingDetails] = useState([]);
 
@@ -77,7 +80,7 @@ export default function Posting() {
     };
 
     const addToPostingDetails = () => {
-        setPostingDetails([...postingDetails, {type: "info", "position": positionName, "empType": empType, "summary": summary, "locations": locations, "minQ": minQText, "prefQ": prefQText}])
+        setPostingDetails([...postingDetails, {type: "info", "position": positionName, "empType": empType, "summary": summary, "locations": locations, "minQ": minQText, "prefQ": prefQText, posted: new Date(), owner:user.uid}])
         setFirstStep(true);
     }
 
