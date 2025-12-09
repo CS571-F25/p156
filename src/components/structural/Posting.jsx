@@ -11,43 +11,43 @@ import Markdown from 'react-markdown'
 export default function Posting() {
     const templates = {
         "Standard Employee": [
-            { type: "form", label: "First Name", description: "", input: "text", required: true},
-            { type: "form", label: "Last Name", description: "", input: "text", required: true},
-            { type: "form", label: "Preferred Name", description: "", input: "text", required: true},
-            { type: "form", label: "Email", description: "", input: "text", required: true},
-            { type: "form", label: "Phone Number", description: "Please only type the numbers", input: "number", required: true},
-            { type: "form", label: "How did you hear about us?", description: "", input: "text", required: false},
-            { type: "form", label: "Resume", description: "", input:"file", required: true},
-            { type: "form", label: "Education", description: "", input:"text", required: true},
-            { type: "form", label: "Are you willing to relocate?", description: "", input:"checkbox", required: true},
-            { type: "form", label: "First day available to work", description: "", input:"date", required: true},
-            { type: "form", label: "Expected salary (USD)", description: "", input:"number", required: true},
-            { type: "form", label: "Message to hiring team", description: "", input:"textarea", required: false},
+            { type: "form", id: crypto.randomUUID(), label: "First Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Last Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Preferred Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Email", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Phone Number", description: "Please only type the numbers", input: "number", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "How did you hear about us?", description: "", input: "text", required: false},
+            { type: "form", id: crypto.randomUUID(), label: "Resume", description: "", input:"file", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Education", description: "", input:"text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Are you willing to relocate?", description: "", input:"checkbox", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "First day available to work", description: "", input:"date", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Expected salary (USD)", description: "", input:"number", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Message to hiring team", description: "", input:"textarea", required: false},
         ],
         Intern: [
-            { type: "form", label: "First Name", description: "", input: "text", required: true},
-            { type: "form", label: "Last Name", description: "", input: "text", required: true},
-            { type: "form", label: "Preferred Name", description: "", input: "text", required: true},
-            { type: "form", label: "Email", description: "", input: "text", required: true},
-            { type: "form", label: "Phone Number", description: "Please only type the numbers", input: "number", required: true},
-            { type: "form", label: "Resume", description: "", input:"file", required: true},
-            { type: "form", label: "University/College Name", description: "", input:"text", required: true},
-            { type: "form", label: "Major", description: "", input:"text", required: true},
-            { type: "form", label: "Minor/Certificates/Concentrations", description: "", input:"text", required: false},
-            { type: "form", label: "GPA", description: "Please enter on a 4.0 scale", input:"number", required: true},
-            { type: "form", label: "Are you willing to relocate?", description: "", input:"checkbox", required: true},
-            { type: "form", label: "Message to hiring team", description: "", input:"textarea", required: false},
+            { type: "form", id: crypto.randomUUID(), label: "First Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Last Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Preferred Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Email", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Phone Number", description: "Please only type the numbers", input: "number", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Resume", description: "", input:"file", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "University/College Name", description: "", input:"text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Major", description: "", input:"text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Minor/Certificates/Concentrations", description: "", input:"text", required: false},
+            { type: "form", id: crypto.randomUUID(), label: "GPA", description: "Please enter on a 4.0 scale", input:"number", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Are you willing to relocate?", description: "", input:"checkbox", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Message to hiring team", description: "", input:"textarea", required: false},
         ],
         Contract: [
-            { type: "form", label: "First Name", description: "", input: "text", required: true},
-            { type: "form", label: "Last Name", description: "", input: "text", required: true},
-            { type: "form", label: "Preferred Name", description: "", input: "text", required: true},
-            { type: "form", label: "Email", description: "", input: "text", required: true},
-            { type: "form", label: "Phone Number", description: "Please only type the numbers", input: "number", required: true},
-            { type: "form", label: "Resume", description: "", input:"file", required: false},
-            { type: "form", label: "Describe your previous contract work, or related experience related to this position", description: "", input:"textarea", required: true},
-            { type: "form", label: "Are you willing to relocate?", description: "", input:"checkbox", required: true},
-            { type: "form", label: "Message to hiring team", description: "", input:"textarea", required: false},
+            { type: "form", id: crypto.randomUUID(), label: "First Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Last Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Preferred Name", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Email", description: "", input: "text", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Phone Number", description: "Please only type the numbers", input: "number", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Resume", description: "", input:"file", required: false},
+            { type: "form", id: crypto.randomUUID(), label: "Describe your previous contract work, or related experience related to this position", description: "", input:"textarea", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Are you willing to relocate?", description: "", input:"checkbox", required: true},
+            { type: "form", id: crypto.randomUUID(), label: "Message to hiring team", description: "", input:"textarea", required: false},
         ], 
     };
 
@@ -75,7 +75,7 @@ export default function Posting() {
 
     const addField = () => {
         if (!newFieldLabel.trim()) return;
-        setFields([...fields, { type: "form", label: newFieldLabel, description: newFieldDescription, input: newFieldType, required: newFieldRequired }]);
+        setFields([...fields, { type: "form", id: crypto.randomUUID(), label: newFieldLabel, description: newFieldDescription, input: newFieldType, required: newFieldRequired }]);
         setNewFieldLabel("");
         setNewFieldDescription("");
         setNewFieldType("");
@@ -102,24 +102,39 @@ export default function Posting() {
     };
 
     const getEmployeeType = (v) => {
-        if (v === Constants.employeeType.FullTime) {return "Full Time"}
-        else if (v === Constants.employeeType.PartTime) {return "Part Time"}
-        else if (v === Constants.employeeType.Intern) {return "Internship"}
-        else if (v === Constants.employeeType.Contract) {return "Contract"}
-        else if (v === Constants.employeeType.Other) {return "Other"}
+        if (v === Constants.employeeType.FullTime) { return "Full Time" }
+        else if (v === Constants.employeeType.PartTime) { return "Part Time" }
+        else if (v === Constants.employeeType.Intern) { return "Internship" }
+        else if (v === Constants.employeeType.Contract) { return "Contract" }
+        else if (v === Constants.employeeType.Other) { return "Other" }
     }
 
-    const handleRemove = () => {
-
+    const handleRemove = (id) => {
+        setFields(fields.filter(field => field.id !== id));
     }
 
-    const handleMoveUp = () => {
-        
-    }
+    const handleMoveUp = (id) => {
+        setFields(prev => {
+            const index = prev.findIndex(item => item.id === id);
+            if (index <= 0) return prev; // can't move up
 
-    const handleMoveDown = () => {
-        
-    }
+            const newArr = [...prev];
+            [newArr[index - 1], newArr[index]] = [newArr[index], newArr[index - 1]];
+            return newArr;
+        });
+    };
+
+    const handleMoveDown = (id) => {
+        setFields(prev => {
+            const index = prev.findIndex(item => item.id === id);
+            if (index === -1 || index >= prev.length - 1) return prev; // can't move down
+
+            const newArr = [...prev];
+            [newArr[index + 1], newArr[index]] = [newArr[index], newArr[index + 1]];
+            return newArr;
+        });
+    };
+
 
     useEffect(() => {
         if (fields.length === 0) setCanPublish(false)
@@ -359,7 +374,6 @@ export default function Posting() {
             { firstStep ?
             <Card className="p-3">
                 <h3 className="text-center">Preview Job Posting</h3>
-                {fields.length === 0 && postingDetails.length == 0&& <p className="text-muted">No fields added yet.</p>}
                 <Container>
                     {
                         postingDetails.map((d, i) => {
@@ -368,13 +382,14 @@ export default function Posting() {
                                 <p><em>{getEmployeeType(d.empType)} Position</em></p>
                                 <p>Location(s): {d.locations}</p>
                                 <Markdown>{d.summary}</Markdown>
-                                {d.minQ ? <div><p className="fw-bold">Minimum Qualifications:</p><p>{d.minQ}</p></div> : <></>}
-                                {d.prefQ ? <div><p className="fw-bold">Preferred Qualifications:</p><p>{d.prefQ}</p></div> : <></>}
+                                {d.minQ ? <div><p className="fw-bold">Minimum Qualifications:</p><Markdown>{d.minQ}</Markdown></div> : <></>}
+                                {d.prefQ ? <div><p className="fw-bold">Preferred Qualifications:</p><Markdown>{d.prefQ}</Markdown></div> : <></>}
                             </Container>
                         })
                     }
                 </Container>
                 <hr className="border-2 border-top border-primary" />
+                {fields.length === 0 && <p className="fst-italic text-center text-muted">No fields added yet.</p>}
 
                 <Form>
                     {fields.map((f, i) => {
@@ -385,9 +400,9 @@ export default function Posting() {
                                         <Form.Label className="me-3">{f.label}</Form.Label>
                                         <Form.Check className="mb-2" type="checkbox"/>
                                     </div>
-                                    <Button className="me-3" onClick={handleRemove} disabled variant="outline-danger">Remove Field</Button>
-                                    <Button className="me-3" onClick={handleMoveUp} disabled={i===0} variant="secondary">Move Up</Button>
-                                    <Button onClick={handleMoveDown} disabled={fields.length-1===i} variant="secondary">Move Down</Button>
+                                    <Button className="me-3" onClick={() => handleRemove(f.id)} variant="outline-danger">Remove Field</Button>
+                                    <Button className="me-3" onClick={() => handleMoveUp(f.id)} disabled={i===0} variant="secondary">Move Up</Button>
+                                    <Button onClick={() => handleMoveDown(f.id)} disabled={fields.length-1===i} variant="secondary">Move Down</Button>
                                 </Form.Group>
                             );
                         } else {
@@ -395,9 +410,9 @@ export default function Posting() {
                                 <Form.Group className="mb-5" key={i}>
                                     <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
                                     <Form.Control className="mb-3" disabled placeholder={`The applicant's response to \"${f.label}\"`} type={f.input} required={f.required}/>
-                                    <Button className="me-3" onClick={handleRemove} disabled variant="outline-danger">Remove Field</Button>
-                                    <Button className="me-3" onClick={handleMoveUp} disabled={i===0} variant="secondary">Move Up</Button>
-                                    <Button onClick={handleMoveDown} disabled={fields.length-1===i} variant="secondary">Move Down</Button>
+                                    <Button className="me-3" onClick={() => handleRemove(f.id)} variant="outline-danger">Remove Field</Button>
+                                    <Button className="me-3" onClick={() => handleMoveUp(f.id)} disabled={i===0} variant="secondary">Move Up</Button>
+                                    <Button onClick={() => handleMoveDown(f.id)} disabled={fields.length-1===i} variant="secondary">Move Down</Button>
                                 </Form.Group>
                             );
                         }

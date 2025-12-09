@@ -1,13 +1,17 @@
 import React from "react";
 import { Card, Col, Button, Modal, Container, Form } from "react-bootstrap";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Constants from "../../Constants";
 import Markdown from "react-markdown";
 import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useUser } from "../contexts/SignedInStatus";
 
 
 export default function Role(props) {
+
+    const { user, setUser } = useUser();
+
     // Modal state variables
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -33,12 +37,15 @@ export default function Role(props) {
         // write to props.id
         const individualApplicationID = crypto.randomUUID();
         const jobID = props.id;
-        setFormValues({ ...formValues, "XX-submittedTimeStamp": new Date(), });
 
-        await setDoc(doc(db, "submitted-applications", jobID, "recieved-applications", individualApplicationID), {
+        await setDoc(doc(db, "submitted-applications", individualApplicationID), {
             formValues
         })
     }
+
+    useEffect(() => {
+        setFormValues({ ...formValues, "XX-applicationID": props.id,"XX-submittedTimeStamp": new Date(), "userUID": user.uid, "status": Constants.ApplicationStatus.UnderReview});
+    }, [])
 
     return (
         <>
