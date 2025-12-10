@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Container, Card, Row, Col } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router';
+import { useNavigate, Link, useParams, useSearchParams } from 'react-router';
 
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { app, db } from "../../firebase"; 
@@ -14,9 +14,10 @@ import { useUser } from "../contexts/SignedInStatus";
 export default function ReWorkeDayRegister() {
 
     const navigateToRoute = useNavigate();
-    
-    const [roleSelected, setRoleSelected] = useState(false);
-    const [roleName, setRoleName] = useState("");
+
+    const [searchParams] = useSearchParams();
+    const [roleSelected, setRoleSelected] = useState(searchParams.get("role")!==null ? true : false);
+    const [roleName, setRoleName] = useState(searchParams.get("role") ?? "");
     const [error, setError] = useState([false, ""]);
     const [tip, setTip] = useState([false, ""]);
 
@@ -31,7 +32,6 @@ export default function ReWorkeDayRegister() {
         setError([false, ""])
         setRoleSelected(true);
         setRoleName(e.target.value);
-        console.log(roleName)
     }
 
     async function writeNewUser(uid, name, role, photo) {

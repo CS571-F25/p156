@@ -21,6 +21,7 @@ import RecruitmentHome from './components/pages/recruitment/RecruitmentHome';
 
 import { SignedInStatus } from './components/contexts/SignedInStatus';
 import ViewApplications from './components/pages/recruitment/ViewApplications';
+import GettingStarted from './components/pages/GettingStarted';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/logout" element={<ReWorkeDayLogout />}></Route>
             <Route path="/openroles" element={<OpenRoles />}></Route>
             <Route path="/about" element={<About />}></Route>
+            <Route path="/getting-started" element={<GettingStarted />}></Route>
             <Route path="*" element={<NoMatch />} />
           </Route>
           <Route path="/recruitment" element={<ReWorkeDayLayout />}>

@@ -24,7 +24,7 @@ function ReWorkeDayHome () {
             <h1 className="text-center py-3">Applying, Reimagined</h1>
             <h2 className="text-center pb-3">Say goodbye to repetitive and unnecessary friction.</h2>
 
-            <ReWorkeDayButton label="See our templates" icon="bi bi-arrow-right"/>
+            <ReWorkeDayButton to="/getting-started" label="Get started" icon="bi bi-arrow-right"/>
             
             <Container className="py-5">
 

@@ -30,15 +30,25 @@ export default function OpenRoles() {
     return (
         <Container className="py-4">
             <h1 className='text-center pb-2'>Open Roles</h1>
-            <Card className="mb-5" style={{height: "5rem"}} />
-            <Row className="gy-3">
-                {postedApplications.map((item, v) => {
-                    return <Col key={v+10} xs={6} md={4}>
-                        <Role key={v} {...item} jobid={item.id}/>
-                    </Col>
-                })
+            { postedApplications.length!==0 ?
+            <Container>
+                <Card className="mb-5" style={{height: "5rem"}} />
+                    <Row className="gy-3">
+                        {postedApplications.map((item, v) => {
+                            return <Col key={v+10} xs={6} md={4}>
+                                <Role key={v} {...item} jobid={item.id}/>
+                            </Col>
+                        })
+                        }
+                    </Row>
+            </Container>
+                    :
+                    <Row>
+                        <p>Loading job postings...</p>
+                        <progress></progress>
+                        {/* finally have a use for this after discovering it in cs 272 (yes I could have used react-spinners) */}
+                    </Row>
                 }
-            </Row>
         </Container>
     );
 }
