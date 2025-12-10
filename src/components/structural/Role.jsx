@@ -6,12 +6,15 @@ import Markdown from "react-markdown";
 import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useUser } from "../contexts/SignedInStatus";
-
+import { uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getStorage } from "firebase/storage";
 
 export default function Role(props) {
+    const individualApplicationID = crypto.randomUUID();
 
     const { user, setUser } = useUser();
-
     // Modal state variables
     const [show, setShow] = useState(false);
     const [moreID, setMoreID] = useState(false);
@@ -37,6 +40,21 @@ export default function Role(props) {
         else if (v === Constants.employeeType.Other) {return "Other"}
     }
 
+    const handleFileChange = async (e, fieldLabel) => {
+        const { [fieldLabel]: _, ...updatedFormValues } = formValues;
+
+        // Upload the new file
+        const fileRef = ref(storage, `uploads/${individualApplicationID}-${fieldLabel}`);
+        await uploadBytes(fileRef, e.target.files[0]);
+        const url = await getDownloadURL(fileRef);
+
+        // Add the new field in the same object
+        setFormValues({
+            ...updatedFormValues,
+            [fieldLabel]: url,
+        });
+    };
+
     const handleSubmitFinalApplication = async (e) => {
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
@@ -44,8 +62,6 @@ export default function Role(props) {
             e.stopPropagation();
         }
         setValidated(true);
-
-        const individualApplicationID = crypto.randomUUID();
         const jobID = props.id;
 
         await setDoc(doc(db, "submitted-applications", individualApplicationID), {
@@ -87,7 +103,7 @@ export default function Role(props) {
                                 return (
                                     <Form.Group className="mb-5" key={i}>
                                         <div className="d-flex align-items-center mb-2">
-                                            <Form.Label className="me-3">{f.label}</Form.Label>
+                                            <Form.Label className="me-3">{f.label} {f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
                                             <Form.Check className="mb-2" type="checkbox" checked={!!formValues[f.label]} onChange={(e) => setFormValues({...formValues, [f.label]: e.target.checked})}/>
                                             <Form.Control.Feedback type="invalid">
                                                 Oops! This field is required.
@@ -95,6 +111,17 @@ export default function Role(props) {
                                         </div>
                                     </Form.Group>
                                 );
+                            } else if (f.input === "file") {
+                                return (
+                                    <Form.Group className="mb-5" key={i}>
+                                        <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                            <Form.Control className="mb-3" type="file" onChange={(e) => {handleFileChange(e, f.label)}}/>
+                                            {/* <Button onClick={() => {handleUpload(f.label)}}>Upload File</Button> */}
+                                            <Form.Control.Feedback type="invalid">
+                                                Oops! This file upload field is required.
+                                            </Form.Control.Feedback>
+                                    </Form.Group>                                    
+                                )
                             } else {
                                 return (
                                     <Form.Group className="mb-5" key={i}>
