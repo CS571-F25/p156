@@ -149,32 +149,34 @@ export default function ViewApplications(props) {
                                         <Badge className="mb-3" bg={getStatusType(appl.formValues.status)[1]}><span>{getStatusType(appl.formValues.status)[0]}</span></Badge>                                        
                                         { fetchedPostingData.map((postD) => (
                                             postD.applicationFields.map((f, i) => {
+                                                let accessabilityFieldID = `field-${i}-${crypto.randomUUID()}`;
+                                                
                                                 const label = postD.applicationFields[i].label;
                                                 const required = postD.applicationFields[i].required;
                                                 const inputType = postD.applicationFields[i].input;
                                                 const response = appl.formValues[postD.applicationFields[i].label];
                                                 if (inputType === "checkbox") {
                                                     return (
-                                                        <Form.Group className="mb-1" key={i}>
+                                                        <Form.Group controlId={accessabilityFieldID} className="mb-1" key={i}>
                                                             <div className="d-flex align-items-center mb-2">
-                                                                <Form.Label className="me-3">{label}</Form.Label>
-                                                                <Form.Check className="mb-2" type="checkbox" disabled defaultChecked={response}/>
+                                                                <Form.Label htmlFor={accessabilityFieldID}className="me-3">{label}</Form.Label>
+                                                                <Form.Check id={accessabilityFieldID}className="mb-2" type="checkbox" disabled defaultChecked={response}/>
                                                             </div>
                                                         </Form.Group>
                                                     );
                                                 } else if(inputType === "file"){
                                                     return (
-                                                        <Form.Group className="mb-3" key={i}>
-                                                            <Form.Label>{label}{required ? <span className="text-danger"> *</span> : <></>}</Form.Label><br></br>
-                                                            <Button disabled={isLoading} onClick={() => viewUploadedFile(appl.id, label)}>View Uploaded File</Button>
+                                                        <Form.Group controlId={accessabilityFieldID}className="mb-3" key={i}>
+                                                            <Form.Label htmlFor={accessabilityFieldID}>{label}{required ? <span className="text-danger"> *</span> : <></>}</Form.Label><br></br>
+                                                            <Button id={accessabilityFieldID} disabled={isLoading} onClick={() => viewUploadedFile(appl.id, label)}>View Uploaded File</Button>
                                                             {/* <Form.Control className="mb-3" readOnly disabled value={getFileURL(appl.id, label)} type={"text"} required={required}/> */}
                                                         </Form.Group>
                                                     );                                                    
                                                 } else {
                                                     return (
-                                                        <Form.Group className="mb-1" key={i}>
-                                                            <Form.Label>{label}{required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
-                                                            <Form.Control className="mb-3" disabled value={response} type={inputType} required={required}/>
+                                                        <Form.Group controlId={accessabilityFieldID} className="mb-1" key={i}>
+                                                            <Form.Label htmlFor={accessabilityFieldID}>{label}{required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                                            <Form.Control id={accessabilityFieldID} className="mb-3" disabled value={response} type={inputType} required={required}/>
                                                         </Form.Group>
                                                     );
                                                 }    

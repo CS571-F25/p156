@@ -154,10 +154,11 @@ export default function Posting() {
                 <h3>Basic Information</h3>
                 <Row className="align-items-end">
                     <Col>
-                        <Form.Group className="mb-2">
+                        <Form.Group controlId={"accessibility-PositionName"} className="mb-2">
                             <div className="mb-4">
-                                <Form.Label>Position Name</Form.Label>
+                                <Form.Label htmlFor={"accessibility-PositionName"}>Position Name</Form.Label>
                                 <Form.Control
+                                    id={"accessibility-PositionName"}
                                     disabled={postingDetails.length>0}
                                     placeholder="e.g. Cybersecurity Intern"
                                     value={positionName}
@@ -166,10 +167,11 @@ export default function Posting() {
                             </div>
                         </Form.Group>
 
-                        <Form.Group className="mb-2">
+                        <Form.Group controlId={"accessibility-employmentType"} className="mb-2">
                             <div className="mb-4">
-                                <Form.Label>Employment Type</Form.Label>
+                                <Form.Label htmlFor={"accessibility-employmentType"}>Employment Type</Form.Label>
                                 <Form.Select
+                                    id={"accessibility-employmentType"}
                                     value={empType}
                                     disabled={postingDetails.length>0}
                                     onChange={(e) => {setEmpType(e.target.value)}}
@@ -186,10 +188,11 @@ export default function Posting() {
                             </div>
                         </Form.Group>
 
-                        <Form.Group className="mb-2">
+                        <Form.Group controlId={"accessibility-summary"} className="mb-2">
                             <div className="mb-4">
-                                <Form.Label>Summary</Form.Label>
+                                <Form.Label htmlFor={"accessibility-summary"}>Summary</Form.Label>
                                 <Form.Control
+                                    id={"accessibility-summary"}                                
                                     disabled={postingDetails.length>0}
                                     value={summary}
                                     onChange={(e) => setSummary(e.target.value)}
@@ -202,10 +205,11 @@ export default function Posting() {
                             </div>
                         </Form.Group>
 
-                        <Form.Group className="mb-2">
+                        <Form.Group controlId={"accessibility-location"} className="mb-2">
                             <div className="mb-4">
-                                <Form.Label>Location(s)</Form.Label>
+                                <Form.Label htmlFor={"accessibility-location"}>Location(s)</Form.Label>
                                 <Form.Control
+                                    id={"accessibility-location"}                                
                                     disabled={postingDetails.length>0}
                                     value={locations}
                                     onChange={(e) => setLocations(e.target.value)}
@@ -214,10 +218,11 @@ export default function Posting() {
                             </div>
                         </Form.Group>
 
-                        <Form.Group className="mb-2">
+                        <Form.Group controlId={"accessibility-minQ-1"} className="mb-2">
                             <div className="d-flex align-items-center mb-2">
-                                <Form.Label className="me-3">Add minimum qualifications?</Form.Label>
+                                <Form.Label htmlFor={"accessibility-minQ-1"} className="me-3">Add minimum qualifications?</Form.Label>
                                 <Form.Check
+                                    id={"accessibility-minQ-1"}                                
                                     disabled={postingDetails.length>0}
                                     type="checkbox"
                                     checked={minQ}
@@ -225,11 +230,14 @@ export default function Posting() {
                                     onChange={() => setMinQ(prev => !prev)}
                                 />
                             </div>
+                            </Form.Group>
                             {
                                 minQ ?
                                 <div className="mb-4">
-                                    <Form.Label>Minimum Qualifications</Form.Label>
+                                    <Form.Group controlId="accessibility-minQ-2">
+                                    <Form.Label htmlFor={"accessibility-minQ-2"}>Minimum Qualifications</Form.Label>
                                     <Form.Control
+                                        id={"accessibility-minQ-2"}
                                         disabled={postingDetails.length>0}
                                         className="align-middle"
                                         placeholder="e.g. willingness to learn!"
@@ -238,16 +246,17 @@ export default function Posting() {
                                         onChange={(e) => setMinQText(e.target.value)}                                        
                                     />
                                     <sub>Markdown is also supported!</sub>
+                                    </Form.Group>
                                 </div>
                                 :
                                 <></>
                             }
-                        </Form.Group>
 
-                        <Form.Group className="mb-2">
+                        <Form.Group controlId={"accessibility-prefQ-1"} className="mb-2">
                             <div className="d-flex align-items-center mb-2">
-                                <Form.Label className="me-3">Add preferred qualifications?</Form.Label>
+                                <Form.Label htmlFor={"accessibility-prefQ-1"} className="me-3">Add preferred qualifications?</Form.Label>
                                 <Form.Check
+                                    id={"accessibility-prefQ-1"}                                
                                     disabled={postingDetails.length>0}
                                     type="checkbox"
                                     checked={prefQ}
@@ -255,12 +264,15 @@ export default function Posting() {
                                     onChange={() => setPrefQ(prev => !prev)}
                                 />
                             </div>
+                        </Form.Group>
 
                             {
                                 prefQ ?
                                 <div className="mb-4">
-                                    <Form.Label>Preferred Qualifications</Form.Label>
-                                    <Form.Control                                    
+                                    <Form.Group controlId="accessibility-prefQ-2">
+                                    <Form.Label htmlFor={"accessibility-prefQ-2"}>Preferred Qualifications</Form.Label>
+                                    <Form.Control            
+                                        id={"accessibility-prefQ-2"}                                                            
                                         disabled={postingDetails.length>0}
                                         className="align-middle"
                                         placeholder="e.g. penetration testing, database security"
@@ -269,11 +281,11 @@ export default function Posting() {
                                         onChange={(e) => setPrefQText(e.target.value)}
                                     />
                                     <sub>Markdown is also supported!</sub>
+                                    </Form.Group>
                                 </div>
                                 :
                                 <></>
                             }
-                        </Form.Group>
                     </Col>
                 </Row>
                 {/* <Row> */}
@@ -316,9 +328,10 @@ export default function Posting() {
             <Card className="p-3 mb-4">
                 <h3>Add New Field</h3>
                     <Container>
-                        <Form.Group className="mb-2">
-                            <Form.Label>Label</Form.Label>
+                        <Form.Group controlId={"accessibility-label-1"} className="mb-2">
+                            <Form.Label htmlFor={"accessibility-label-1"}>Label</Form.Label>
                             <Form.Control
+                                id={"accessibility-label-1"}                            
                                 value={newFieldLabel}
                                 onChange={(e) => setNewFieldLabel(e.target.value)}
                                 placeholder="e.g. Salary Expectations, Resume, Phone Number"
@@ -327,9 +340,10 @@ export default function Posting() {
                     </Container>
 
                     <Container>
-                        <Form.Group className="mb-2">
-                            <Form.Label>Description</Form.Label>
+                        <Form.Group controlId={"accessibility-description-1"} className="mb-2">
+                            <Form.Label htmlFor={"accessibility-description-1"}>Description</Form.Label>
                             <Form.Control
+                                id={"accessibility-description-1"}
                                 value={newFieldDescription}
                                 onChange={(e) => setNewFieldDescription(e.target.value)}
                                 placeholder="If you'd like to clarify what the field means this description will be added as a tooltip"
@@ -338,9 +352,10 @@ export default function Posting() {
                     </Container>                    
                     
                     <Container>
-                        <Form.Group className="mb-2">
-                            <Form.Label>Input Type</Form.Label>
+                        <Form.Group controlId={"accessibility-input-1"} className="mb-2">
+                            <Form.Label htmlFor={"accessibility-input-1"}>Input Type</Form.Label>
                             <Form.Select
+                                id="accessibility-input-1"
                                 value={newFieldType}
                                 onChange={(e) => setNewFieldType(e.target.value)}
                             >
@@ -358,15 +373,16 @@ export default function Posting() {
                     </Container>
                     
                     <Container>
-                        <Form.Group className="d-flex align-items-center mb-2">
+                        <Form.Group controlId={"accessibility-req"} className="d-flex align-items-center mb-2">
                             <Form.Check
+                                id={"accessibility-req"}                            
                                 className="mb-2 me-2"
                                 value={newFieldRequired}
                                 checked={newFieldRequired}
                                 onChange={() => setNewFieldRequired(prev => !prev)}
                             >
                             </Form.Check>
-                            <Form.Label className="me-3">Required Field?</Form.Label>
+                            <Form.Label htmlFor={"accessibility-req"} className="me-3">Required Field?</Form.Label>
                         </Form.Group>
                     </Container>
 
@@ -398,12 +414,13 @@ export default function Posting() {
 
                 <Form>
                     {fields.map((f, i) => {
+                        let accessabilityFieldID = `field-${i}-${crypto.randomUUID()}`
                         if (f.input === "checkbox") {
                             return (
-                                <Form.Group className="mb-5" key={i}>
+                                <Form.Group controlId={accessabilityFieldID} className="mb-5" key={i}>
                                     <div className="d-flex align-items-center mb-2">
-                                        <Form.Label className="me-3">{f.label}</Form.Label>
-                                        <Form.Check className="mb-2" type="checkbox"/>
+                                        <Form.Label htmlFor={accessabilityFieldID} className="me-3">{f.label}</Form.Label>
+                                        <Form.Check id={accessabilityFieldID} className="mb-2" type="checkbox"/>
                                     </div>
                                     <Button className="me-3" onClick={() => handleRemove(f.id)} variant="outline-danger">Remove Field</Button>
                                     <Button className="me-3" onClick={() => handleMoveUp(f.id)} disabled={i===0} variant="secondary">Move Up</Button>
@@ -412,9 +429,9 @@ export default function Posting() {
                             );
                         } else {
                             return (
-                                <Form.Group className="mb-5" key={i}>
-                                    <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
-                                    <Form.Control className="mb-3" disabled placeholder={`The applicant's response to \"${f.label}\"`} type={f.input} required={f.required}/>
+                                <Form.Group controlId={accessabilityFieldID} className="mb-5" key={i}>
+                                    <Form.Label htmlFor={accessabilityFieldID}>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                    <Form.Control id={accessabilityFieldID} className="mb-3" disabled placeholder={`The applicant's response to \"${f.label}\"`} type={f.input} required={f.required}/>
                                     <Button className="me-3" onClick={() => handleRemove(f.id)} variant="outline-danger">Remove Field</Button>
                                     <Button className="me-3" onClick={() => handleMoveUp(f.id)} disabled={i===0} variant="secondary">Move Up</Button>
                                     <Button onClick={() => handleMoveDown(f.id)} disabled={fields.length-1===i} variant="secondary">Move Down</Button>

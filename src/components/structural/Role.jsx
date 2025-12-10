@@ -113,13 +113,14 @@ export default function Role(props) {
 
                     <Form noValidate validated={validated} onSubmit={handleSubmitFinalApplication}>
                         {props.applicationFields.map((f, i) => {
+                            let accessabilityFieldID = `field-${i}-${crypto.randomUUID()}`;
                             if (f.input === "checkbox") {
                                 return (
-                                    <Form.Group className="mb-5" key={i}>
+                                    <Form.Group className="mb-5" key={i} controlId={accessabilityFieldID}>
                                         <div className="d-flex align-items-center mb-2">
                                         { f.description ? <div className="mb-1"><ReWorkeDayToolTip description={f.description}/> &nbsp;</div> : <></> } 
-                                            <Form.Label className="me-3">{f.label} {f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
-                                            <Form.Check className="mb-2" type="checkbox" checked={!!formValues[f.label]} onChange={(e) => setFormValues({...formValues, [f.label]: e.target.checked})}/>
+                                            <Form.Label htmlFor={accessabilityFieldID} className="me-3">{f.label} {f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                            <Form.Check id={accessabilityFieldID} className="mb-2" type="checkbox" checked={!!formValues[f.label]} onChange={(e) => setFormValues({...formValues, [f.label]: e.target.checked})}/>
                                             <Form.Control.Feedback type="invalid">
                                                 Oops! This field is required.
                                             </Form.Control.Feedback>
@@ -128,10 +129,10 @@ export default function Role(props) {
                                 );
                             } else if (f.input === "file") {
                                 return (
-                                    <Form.Group className="mb-5" key={i}>
+                                    <Form.Group className="mb-5" key={i} controlId={accessabilityFieldID}>
                                         { f.description ? <><ReWorkeDayToolTip description={f.description}/> {" "}</> : <></> } 
-                                        <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
-                                            <Form.Control className="mb-3" type="file" onChange={(e) => {handleFileChange(e, f.label)}}/>
+                                        <Form.Label htmlFor={accessabilityFieldID}>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                            <Form.Control id={accessabilityFieldID} className="mb-3" type="file" onChange={(e) => {handleFileChange(e, f.label)}}/>
                                             {/* <Button onClick={() => {handleUpload(f.label)}}>Upload File</Button> */}
                                             <Form.Control.Feedback type="invalid">
                                                 Oops! This file upload field is required.
@@ -140,21 +141,21 @@ export default function Role(props) {
                                 )
                             } else {
                                 return (
-                                    <Form.Group className="mb-5" key={i}>
+                                    <Form.Group className="mb-5" key={i} controlId={accessabilityFieldID}>
                                         { f.description ? <><ReWorkeDayToolTip description={f.description}/> {" "}</> : <></> } 
-                                        <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+                                        <Form.Label htmlFor={accessabilityFieldID}>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
 
 
                                         {f.input==="textarea" ? 
                                             <>
-                                                <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} as={f.input} required={f.required}/>                                            
+                                                <Form.Control id={accessabilityFieldID} className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} as={f.input} required={f.required}/>                                            
                                                 <Form.Control.Feedback type="invalid">
                                                     Oops! This field is required.
                                                 </Form.Control.Feedback>                                                    
                                             </>
                                             :
                                             <>
-                                                <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} type={f.input} required={f.required}/>
+                                                <Form.Control id={accessabilityFieldID} className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} type={f.input} required={f.required}/>
                                                 <Form.Control.Feedback type="invalid">
                                                     Oops! This field is required.
                                                 </Form.Control.Feedback>                                                    
