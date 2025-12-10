@@ -7,9 +7,13 @@ import { useUser } from "../contexts/SignedInStatus";
 import { storage, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL  } from "firebase/storage";
+import { useNavigate, Link } from "react-router";
 
 export default function Role(props) {
     const [individualApplicationID] = useState(() => crypto.randomUUID());
+
+
+    const goTo = useNavigate();
 
     const { user, setUser } = useUser();
     // Modal state variables
@@ -27,7 +31,13 @@ export default function Role(props) {
     });
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        if (user.role === "2") {
+            alert("You must be logged in as an applicant to apply for a position!")
+            return;
+        }
+        setShow(true);
+    }
 
     const getEmployeeType = (v) => {
         if (v === Constants.employeeType.FullTime) {return "Full Time"}
@@ -94,6 +104,7 @@ export default function Role(props) {
                         }
                     </Container>
                     <hr className="border-2 border-top border-primary" />
+                    { user.role === "1" ? <Container>
 
                     <Form noValidate validated={validated} onSubmit={handleSubmitFinalApplication}>
                         {props.applicationFields.map((f, i) => {
@@ -146,6 +157,10 @@ export default function Role(props) {
                         })}
                     </Form>
 
+                </Container> : <>
+                    {/* Conditional render if user is not logged in at all */}
+                    <Container><Card><Card.Body><Card.Title className="text-center fw-bold">You must be logged in as an applicant to submit an application!</Card.Title><div className="d-flex justify-content-center mt-3"><Button as={Link} to="/register">Register as an applicant</Button></div></Card.Body></Card></Container>                
+                </>}
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="outline-secondary" onClick={handleClose}>
