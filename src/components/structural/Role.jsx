@@ -162,7 +162,7 @@ export default function Role(props) {
 
                     </Container> : <>
                     {/* Conditional render if user is not logged in at all */}
-                    <Container><Card><Card.Body><Card.Title className="text-center fw-bold">You must be logged in as an applicant to submit an application!</Card.Title><div className="d-flex justify-content-center mt-3"><Button as={Link} to="/register">Register as an applicant</Button></div></Card.Body></Card></Container>                
+                    <Container><Card><Card.Body><Card.Title className="text-center fw-bold">You must be logged in as an applicant to submit an application!</Card.Title><div className="d-flex justify-content-center mt-3"><Button as={Link} to="/register?role=1">Register as an applicant</Button></div></Card.Body></Card></Container>                
                 </>}
                 </Modal.Body>
                 <Modal.Footer>
