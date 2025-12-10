@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Row, Col, Card, Toast, ToastContainer} from "react-bootstrap";
+import { Button, Container, Row, Col, Card, Toast, ToastContainer, Modal } from "react-bootstrap";
 import { Link, useSearchParams } from 'react-router';
 
 import Constants from '../../../Constants';
@@ -18,10 +18,20 @@ export default function RecruitmentHome() {
     const [ownedApplicationResults, setOwnedApplicationResults] = useState([]);
     const [fetchedApplications, setFetchedApplications] = useState([]);
 
-    const handleClosePosting = async (idToDelete) => {
+    const [showModal, setShowModal] = useState(false);
+    const [manualAction, setManualAction] = useState(new Date());
+
+    const [savedIDToDelete, setSavedIDToDelete] = useState("");
+
+    const handleClose = () => {
+        setShowModal(false);
+    }
+
+    const handleClosePosting = async () => {
+        setShowModal(true);
         try {
             // Create a reference to the document
-            const docRef = doc(db, "posted-applications", idToDelete);
+            const docRef = doc(db, "posted-applications", savedIDToDelete);
 
             // Delete the document
             await deleteDoc(docRef);
@@ -29,6 +39,9 @@ export default function RecruitmentHome() {
         } catch (error) {
             alert("A fatal error occured while trying to delete your posting. Please try again later.");
             console.error("Error deleting document: ", error);
+        } finally {
+            setShowModal(false);
+            setManualAction(new Date());  
         }
     }
 
@@ -56,7 +69,7 @@ export default function RecruitmentHome() {
         //     }));
         // }
         // fetchApplications();        
-    }, [])
+    }, [manualAction])
 
 
 
@@ -66,6 +79,19 @@ export default function RecruitmentHome() {
         {
         user.role == Constants.Roles.Recruiter ?
         <>
+            {showModal ?
+                <Modal size="lg" show={showModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmation</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Woah! If you close this job posting, no one will be able to apply and you will not be able to view the submitted applications!</Modal.Body>
+                    <Modal.Footer className="d-flex">
+                        <Button variant="danger" onClick={handleClosePosting}>I understand, continue with closing the posting</Button>
+                        <Button variant="success" onClick={handleClose}>Nevermind</Button>
+                    </Modal.Footer>
+                </Modal>
+                :<></>
+            }
             { posted ?
             <ToastContainer className="me-5 mb-5" style={{zIndex: 1}}position="bottom-end">
                 <Toast bg="success" onClose={() => setShowToast(false)} show={posted} delay={6767} autohide>
@@ -116,7 +142,7 @@ export default function RecruitmentHome() {
                                             </Col>
 
                                             <Col xs="auto">
-                                                <Button onClick={() => handleClosePosting(posting.id)} variant="danger">Close Job Posting</Button>
+                                                <Button onClick={() => {setSavedIDToDelete(posting.id); setShowModal(true)}} variant="danger">Close Job Posting</Button>
                                             </Col>
                                             </Row>
                                         </Card.Body>
