@@ -6,7 +6,6 @@ import ReWorkeDayFooter from "./ReWorkeDayFooter";
 function ReWorkeDayLayout(props) {
     return (
         <div className="siteBackground" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        {/* <div> */}
             <ReWorkeDayNavbar />
             
 
@@ -15,25 +14,8 @@ function ReWorkeDayLayout(props) {
             </div>
             
             <ReWorkeDayFooter/>
-
         </div>
-
-
     );
-
-
-    // return (
-    //     // <div className="d-flex flex-column min-vh-100">
-    //     <div>
-    //         <ReWorkeDayNavbar />
-
-    //             <div className="">
-    //                 <Outlet />
-    //             </div>
-
-    //         <ReWorkeDayFooter />
-    //     </div>
-    // );
 }
 
 export default ReWorkeDayLayout;
