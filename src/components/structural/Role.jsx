@@ -14,16 +14,19 @@ export default function Role(props) {
 
     // Modal state variables
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
+    const [validated, setValidated] = useState(false);
 
     const [formValues, setFormValues] = useState({});
 
-    const formatted = props.postingDetails[0].posted.toDate().toLocaleDateString("en-US", {
+    const formattedDate = props.postingDetails[0].posted.toDate().toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
     });
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const getEmployeeType = (v) => {
         if (v === Constants.employeeType.FullTime) {return "Full Time"}
@@ -33,8 +36,14 @@ export default function Role(props) {
         else if (v === Constants.employeeType.Other) {return "Other"}
     }
 
-    const handleSubmitFinalApplication = async () => {
-        // write to props.id
+    const handleSubmitFinalApplication = async (e) => {
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        setValidated(true);
+
         const individualApplicationID = crypto.randomUUID();
         const jobID = props.id;
 
@@ -70,7 +79,7 @@ export default function Role(props) {
                     </Container>
                     <hr className="border-2 border-top border-primary" />
 
-                    <Form>
+                    <Form noValidate validated={validated} onSubmit={handleSubmitFinalApplication}>
                         {props.applicationFields.map((f, i) => {
                             if (f.input === "checkbox") {
                                 return (
@@ -78,6 +87,9 @@ export default function Role(props) {
                                         <div className="d-flex align-items-center mb-2">
                                             <Form.Label className="me-3">{f.label}</Form.Label>
                                             <Form.Check className="mb-2" type="checkbox" checked={!!formValues[f.label]} onChange={(e) => setFormValues({...formValues, [f.label]: e.target.checked})}/>
+                                            <Form.Control.Feedback type="invalid">
+                                                Oops! This field is required.
+                                            </Form.Control.Feedback>
                                         </div>
                                     </Form.Group>
                                 );
@@ -86,9 +98,21 @@ export default function Role(props) {
                                     <Form.Group className="mb-5" key={i}>
                                         <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
                                         {f.input==="textarea" ? 
-                                            <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} as={f.input} required={f.required}/>
+                                            <>
+                                                <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} as={f.input} required={f.required}/>                                            
+                                                <Form.Control.Feedback type="invalid">
+                                                    Oops! This field is required.
+                                                </Form.Control.Feedback>                                                    
+                                            </>
                                             :
-                                            <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} type={f.input} required={f.required}/>}
+                                            <>
+                                                <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} type={f.input} required={f.required}/>
+                                                <Form.Control.Feedback type="invalid">
+                                                    Oops! This field is required.
+                                                </Form.Control.Feedback>                                                    
+                                            </>
+                                            
+                                            }
                                     </Form.Group>
                                 );
                             }
@@ -100,7 +124,7 @@ export default function Role(props) {
                 <Button variant="outline-secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleSubmitFinalApplication}>
+                <Button variant="primary" type="submit" onClick={handleSubmitFinalApplication}>
                     Submit!
                 </Button>
                 </Modal.Footer>
@@ -109,7 +133,7 @@ export default function Role(props) {
                 <Card.Body>
                     <Card.Title>{props.postingDetails[0].position}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">
-                        Posted: {formatted}
+                        Posted: {formattedDate}
                     </Card.Subtitle>
                     <Card.Text>
                         Position Type: <strong>{getEmployeeType(props.postingDetails[0].empType)}</strong>
