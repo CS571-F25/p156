@@ -14,6 +14,7 @@ export default function Role(props) {
 
     // Modal state variables
     const [show, setShow] = useState(false);
+    const [moreID, setMoreID] = useState(false);
 
     const [validated, setValidated] = useState(false);
 
@@ -69,6 +70,7 @@ export default function Role(props) {
                                 return <Container key={i}>
                                     <h1>{d.position}</h1>
                                     <p><em>{getEmployeeType(d.empType)} Position</em></p>
+                                    <span className="text-muted">Job ID: {" "} <span className="font-monospace">{props.jobid}</span></span>
                                     <p>Location(s): {d.locations}</p>
                                     <Markdown>{d.summary}</Markdown>
                                     {d.minQ ? <><span className="fw-bold">Minimum Qualifications:</span><Markdown>{d.minQ}</Markdown></> : <></>}
@@ -135,10 +137,11 @@ export default function Role(props) {
                     <Card.Subtitle className="mb-2 text-muted">
                         Posted: {formattedDate}
                     </Card.Subtitle>
+                    <Card.Subtitle className="text-muted mb-2">Job ID: {moreID ? <>{props.jobid} <a onClick={() => setMoreID(false)}>{" (minimize)"}</a></> : <>{props.jobid.substring(0,8)} <a onClick={() => setMoreID(true)}>{" ..."}</a></>}</Card.Subtitle>
+                    <Card.Subtitle>Location: <strong>{props.postingDetails[0].locations}</strong></Card.Subtitle>
                     <Card.Text>
                         Position Type: <strong>{getEmployeeType(props.postingDetails[0].empType)}</strong>
                     </Card.Text>
-                    
                     <Button variant="success" onClick={handleShow}>Apply!</Button>
                 </Card.Body>
             </Card>

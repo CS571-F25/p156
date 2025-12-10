@@ -36,12 +36,12 @@ export default function OpenRoles() {
             <Row className="gy-3">
                 {postedApplications.map((item, v) => {
                     return <Col key={v+10} xs={6} md={4}>
-                        <Role key={v} {...item}/>
+                        <Role key={v} {...item} jobid={item.id}/>
                     </Col>
                 })
                 }
             </Row>
-            {/* <Button onClick={() => console.log(postedApplications)}>Developer mode</Button> */}
+            {/* <Button onClick={() => console.log(postedApplications[0].id)}>Developer mode</Button> */}
         </Container>
     );
 }

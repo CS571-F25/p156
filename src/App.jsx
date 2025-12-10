@@ -23,6 +23,7 @@ import RecruitmentHome from './components/pages/recruitment/RecruitmentHome';
 import Constants from './Constants';
 
 import { SignedInStatus } from './components/contexts/SignedInStatus';
+import ViewApplications from './components/pages/recruitment/ViewApplications';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/recruitment" element={<ReWorkeDayLayout />}>
             <Route path="/recruitment/home" element={<RecruitmentHome/>}/>
             <Route path="/recruitment/create" element={<CreatePosting/>}/>
+            <Route path="/recruitment/view-application/:id" element={<ViewApplications />}/>
           </Route>
           <Route path="/applicant" element={<ReWorkeDayLayout />}>
             <Route path="/applicant/home" element={<ApplicantHome/>}/>

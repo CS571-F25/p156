@@ -75,51 +75,17 @@ export default function RecruitmentHome() {
 
                                             <Row className="gy-2 gx-3">
                                             <Col xs="auto">
-                                                <Button onClick={() => handleViewApplications(posting.id)} variant="primary">View Applications</Button>
+                                                <Button as={Link} to={`/recruitment/view-application/${posting.id}?position=${encodeURIComponent(posting.postingDetails[0].position)}`} variant="primary">View Applications</Button>
                                             </Col>
 
                                             <Col xs="auto">
-                                                <Button onClick={() => handleClosePosting(posting.id)}variant="danger">Close Posting</Button>
+                                                <Button onClick={() => handleClosePosting(posting.id)} variant="danger">Close Posting</Button>
                                             </Col>
                                             </Row>
                                         </Card.Body>
                                     </Card>
                                     })    
-                                }   
-                                
-                                {/* <Card className="m-3">
-                                    <Card.Body>
-                                        <Card.Text className="mb-3">Job #2 (2e2e2e2e-5b5b5b-101010)</Card.Text>
-
-                                        <Row className="gy-2 gx-3">
-                                        <Col xs="auto">
-                                            <Button variant="primary">View Applications</Button>
-                                        </Col>
-
-                                        <Col xs="auto">
-                                            <Button variant="danger">Close Opening</Button>
-                                        </Col>
-                                        </Row>
-                                    </Card.Body>
-                                </Card> */}
-
-
-                                {/* <Card className="m-3">
-                                    <Card.Body>
-                                        <Card.Text className="mb-3">Job #3 (1e1e1e-1e1e1e-2e2e2e)</Card.Text>
-
-                                        <Row className="gy-2 gx-3">
-                                        <Col xs="auto">
-                                            <Button variant="primary">View Applications</Button>
-                                        </Col>
-
-                                        <Col xs="auto">
-                                            <Button variant="danger">Close Opening</Button>
-                                        </Col>
-                                        </Row>
-                                    </Card.Body>
-                                </Card> */}
-
+                                }
                             </Card.Body>
                         </Card>
                     </Col>
