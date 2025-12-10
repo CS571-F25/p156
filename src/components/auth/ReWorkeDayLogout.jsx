@@ -25,7 +25,7 @@ export default function ReWorkeDayLogout() {
             >
         <Card style={{width: "18rem"}}>
             <Card.Body>
-                <Card.Title>Success!</Card.Title>
+                <Card.Title><h1>Success!</h1></Card.Title>
                 <Card.Text>{n ? n : "Hey"}, you have been logged out</Card.Text>
             </Card.Body>
             <Card.Footer>Didn't mean that? <Link as={Link} to="/login">Log in again</Link></Card.Footer> 

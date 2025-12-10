@@ -134,7 +134,7 @@ export default function ViewApplications(props) {
         user.role == Constants.Roles.Recruiter ?
             <Container>
                 <Button disabled={isLoading} className="my-3" as={Link} to="/recruitment/home"><i class="bi bi-chevron-left"></i>Back</Button>
-                <h1>Viewing Applications for <u>{searchParams.get("position")}</u></h1>
+                <h1>Viewing Applications for {searchParams.get("position")}</h1>
                 {fetchedApplications.length>0 ?
                 <Container>
                     <Row>
@@ -145,7 +145,7 @@ export default function ViewApplications(props) {
                                 {showMoreApplication ? 
                                 <Card className='mb-5'>
                                     <Card.Body>
-                                        <Card.Title>Application Number: <u className="font-monospace">{appl.id}</u></Card.Title>
+                                        <Card.Title>Application Number: <span className="font-monospace">{appl.id}</span></Card.Title>
                                         <Badge className="mb-3" bg={getStatusType(appl.formValues.status)[1]}><span>{getStatusType(appl.formValues.status)[0]}</span></Badge>                                        
                                         { fetchedPostingData.map((postD) => (
                                             postD.applicationFields.map((f, i) => {
