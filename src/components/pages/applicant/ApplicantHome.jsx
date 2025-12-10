@@ -55,7 +55,6 @@ export default function ApplicantHome() {
                 <ToastContainer className="me-5 mb-5" style={{zIndex: 1}}position="bottom-end">
                     <Toast bg="success" onClose={() => setShowToast(false)} show={submitted} delay={16767} autohide>
                         <Toast.Header>
-                            {/* <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" /> */}
                             <strong className="me-auto">Submitted!</strong>
                             <small>Just now</small>
                         </Toast.Header>
