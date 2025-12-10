@@ -52,7 +52,7 @@ export default function Role(props) {
         });
     };
 
-    const handleSubmitFinalApplication = async (e) => {
+    const handleSubmitFinalApplication = async (e, n) => {
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
@@ -62,7 +62,8 @@ export default function Role(props) {
         const jobID = props.id;
 
         await setDoc(doc(db, "submitted-applications", individualApplicationID), {
-            formValues
+            formValues,
+            positionName: n
         })
     }
 
@@ -150,7 +151,7 @@ export default function Role(props) {
                 <Button variant="outline-secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit" onClick={handleSubmitFinalApplication}>
+                <Button variant="primary" type="submit" onClick={(e) => {handleSubmitFinalApplication(e, props.postingDetails[0].position)}}>
                     Submit!
                 </Button>
                 </Modal.Footer>
