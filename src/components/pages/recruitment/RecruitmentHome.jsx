@@ -6,7 +6,7 @@ import Constants from '../../../Constants';
 import AccessDenied from '../AccessDenied';
 
 import { db } from "../../../firebase"; 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 import { useUser } from "../../contexts/SignedInStatus";
 
@@ -18,8 +18,18 @@ export default function RecruitmentHome() {
     const [ownedApplicationResults, setOwnedApplicationResults] = useState([]);
     const [fetchedApplications, setFetchedApplications] = useState([]);
 
-    const handleClosePosting = () => {
+    const handleClosePosting = async (idToDelete) => {
+        try {
+            // Create a reference to the document
+            const docRef = doc(db, "posted-applications", idToDelete);
 
+            // Delete the document
+            await deleteDoc(docRef);
+
+        } catch (error) {
+            alert("A fatal error occured while trying to delete your posting. Please try again later.");
+            console.error("Error deleting document: ", error);
+        }
     }
 
     useEffect(() => {
@@ -106,7 +116,7 @@ export default function RecruitmentHome() {
                                             </Col>
 
                                             <Col xs="auto">
-                                                <Button onClick={() => handleClosePosting(posting.id)} variant="danger">Close Posting</Button>
+                                                <Button onClick={() => handleClosePosting(posting.id)} variant="danger">Close Job Posting</Button>
                                             </Col>
                                             </Row>
                                         </Card.Body>
