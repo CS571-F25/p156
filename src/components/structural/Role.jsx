@@ -2,13 +2,15 @@ import { Card, Button, Modal, Container, Form } from "react-bootstrap";
 import { useState, useEffect } from "react"
 import Constants from "../../Constants";
 import Markdown from "react-markdown";
+
 import { useUser } from "../contexts/SignedInStatus";
+import ReWorkeDayToolTip from "./ReWorkeDayToolTip";
 
 import { storage, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL  } from "firebase/storage";
 import { useNavigate, Link } from "react-router";
-import ReWorkeDayButton from "./ReWorkeDayButton";
+
 
 export default function Role(props) {
     const [individualApplicationID] = useState(() => crypto.randomUUID());
@@ -115,6 +117,7 @@ export default function Role(props) {
                                 return (
                                     <Form.Group className="mb-5" key={i}>
                                         <div className="d-flex align-items-center mb-2">
+                                        { f.description ? <div className="mb-1"><ReWorkeDayToolTip description={f.description}/> &nbsp;</div> : <></> } 
                                             <Form.Label className="me-3">{f.label} {f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
                                             <Form.Check className="mb-2" type="checkbox" checked={!!formValues[f.label]} onChange={(e) => setFormValues({...formValues, [f.label]: e.target.checked})}/>
                                             <Form.Control.Feedback type="invalid">
@@ -126,6 +129,7 @@ export default function Role(props) {
                             } else if (f.input === "file") {
                                 return (
                                     <Form.Group className="mb-5" key={i}>
+                                        { f.description ? <><ReWorkeDayToolTip description={f.description}/> {" "}</> : <></> } 
                                         <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
                                             <Form.Control className="mb-3" type="file" onChange={(e) => {handleFileChange(e, f.label)}}/>
                                             {/* <Button onClick={() => {handleUpload(f.label)}}>Upload File</Button> */}
@@ -137,7 +141,10 @@ export default function Role(props) {
                             } else {
                                 return (
                                     <Form.Group className="mb-5" key={i}>
+                                        { f.description ? <><ReWorkeDayToolTip description={f.description}/> {" "}</> : <></> } 
                                         <Form.Label>{f.label}{f.required ? <span className="text-danger"> *</span> : <></>}</Form.Label>
+
+
                                         {f.input==="textarea" ? 
                                             <>
                                                 <Form.Control className="mb-3" onChange={(e) => setFormValues({ ...formValues, [f.label]: e.target.value, })} value={formValues[f.label] || ""} as={f.input} required={f.required}/>                                            
