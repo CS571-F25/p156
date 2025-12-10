@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
-import { useParams, useSearchParams } from 'react-router';
+import { useParams, useSearchParams, Link } from 'react-router';
 
 import Constants from '../../../Constants';
 import AccessDenied from '../AccessDenied';
@@ -19,7 +19,7 @@ export default function ViewApplications(props) {
     const { id } = useParams();
     const [fetchedApplications, setFetchedApplications] = useState([]);
     const [fetchedPostingData, setFetchedPostingData] = useState([]);
-
+    const [showMoreApplication, setShowMoreApplication] = useState(false);
 
     const viewUploadedFile = async (imgRefID, label) => {
         try {
@@ -72,17 +72,19 @@ export default function ViewApplications(props) {
         {
         user.role == Constants.Roles.Recruiter ?
             <Container>
+                <Button className="my-3" as={Link} to="/recruitment/home">Back</Button>
                 <h1>Viewing Applications for <u>{searchParams.get("position")}</u></h1>
-
+                {fetchedApplications.length>0 ?
                 <Container>
                     <Row>
                         <Form>
                         {
                         fetchedApplications.map((appl, i) => {
                             return <Col xs={12} key={appl.id}>
+                                {showMoreApplication ? 
                                 <Card className='mb-5'>
                                     <Card.Body>
-                                        <Card.Title>Application Number: {appl.id}</Card.Title>
+                                        <Card.Title>Application Number: <u className="font-monospace">{appl.id}</u></Card.Title>
                                         { fetchedPostingData.map((postD) => (
                                             postD.applicationFields.map((f, i) => {
                                                 const label = postD.applicationFields[i].label;
@@ -114,21 +116,31 @@ export default function ViewApplications(props) {
                                                         </Form.Group>
                                                     );
                                                 }    
-                                                // <div key={i}>
-                                                //     <p>{postD.applicationFields[i].label}</p>
-                                                //     <p>{appl.formValues[postD.applicationFields[i].label]}</p>
-                                                // </div>
                                                 })
                                         ))}
-                                    </Card.Body>
+                                        <Button variant="outline-primary" onClick={() => setShowMoreApplication(false)}>Minimize application</Button>
+                                    </Card.Body> 
                                     <Card.Footer className='text-end text-muted'>{appl.id}</Card.Footer>
                                 </Card>
+                                :
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Title>Application Number: <u className="font-monospace">{appl.id}</u></Card.Title>
+                                        <Card.Subtitle>Submitted on: {formatDate(appl.formValues["XX-submittedTimeStamp"])}</Card.Subtitle>
+                                        <Button className="mt-2" onClick={() => setShowMoreApplication(true)}>Read entire application</Button>
+                                    </Card.Body>
+                                </Card>
+                                }
                             </Col>
                             })
                         }
                         </Form>
                     </Row>
                 </Container>
+            :
+            <Container>
+                <p className="text-muted fst-italic">No applications have been submitted to this position. Maybe you're too early?</p>
+            </Container>}
             </Container>
             :
             <AccessDenied role={Constants.Roles.Recruiter}/>
