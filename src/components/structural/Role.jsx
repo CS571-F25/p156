@@ -12,7 +12,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getStorage } from "firebase/storage";
 
 export default function Role(props) {
-    const individualApplicationID = crypto.randomUUID();
+    const [individualApplicationID] = useState(() => crypto.randomUUID());
 
     const { user, setUser } = useUser();
     // Modal state variables
