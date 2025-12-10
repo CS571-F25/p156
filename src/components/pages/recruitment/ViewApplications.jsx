@@ -133,7 +133,7 @@ export default function ViewApplications(props) {
         {
         user.role == Constants.Roles.Recruiter ?
             <Container>
-                <Button disabled={isLoading} className="my-3" as={Link} to="/recruitment/home">Back</Button>
+                <Button disabled={isLoading} className="my-3" as={Link} to="/recruitment/home"><i class="bi bi-chevron-left"></i>Back</Button>
                 <h1>Viewing Applications for <u>{searchParams.get("position")}</u></h1>
                 {fetchedApplications.length>0 ?
                 <Container>
@@ -181,7 +181,7 @@ export default function ViewApplications(props) {
                                                 })
                                         ))}
                                         
-                                        <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(false)}>Minimize application</Button>
+                                        <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(false)}><i class="bi bi-chevron-up"></i>&nbsp;Minimize application</Button>
                                         <Container className="text-end d-flex justify-content-end gap-3 mt-5">
                                             <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application</Button>
                                             <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position</Button>
@@ -206,9 +206,9 @@ export default function ViewApplications(props) {
                                     </Card.Body>
                                     <Card.Footer>
                                         <Container className="text-end d-flex justify-content-end gap-3">
-                                            <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(true)}>Read entire application</Button>
-                                            <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application</Button>
-                                            <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position</Button>
+                                            <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(true)}>Read entire application &nbsp;<i class="bi bi-chevron-down"></i></Button>
+                                            <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application <i class="bi bi-ban"></i></Button>
+                                            <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position <i class="bi bi-person-check-fill"></i></Button>
                                         </Container>
                                     </Card.Footer>
                                 </Card>

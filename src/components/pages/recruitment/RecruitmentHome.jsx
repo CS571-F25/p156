@@ -138,11 +138,11 @@ export default function RecruitmentHome() {
 
                                             <Row className="gy-2 gx-3">
                                             <Col xs="auto">
-                                                <Button as={Link} to={`/recruitment/view-application/${posting.id}?position=${encodeURIComponent(posting.postingDetails[0].position)}`} variant="primary">View Applications</Button>
+                                                <Button as={Link} to={`/recruitment/view-application/${posting.id}?position=${encodeURIComponent(posting.postingDetails[0].position)}`} variant="primary"> <i class="bi bi-eye"></i> &nbsp;View Applications </Button>
                                             </Col>
 
                                             <Col xs="auto">
-                                                <Button onClick={() => {setSavedIDToDelete(posting.id); setShowModal(true)}} variant="danger">Close Job Posting</Button>
+                                                <Button onClick={() => {setSavedIDToDelete(posting.id); setShowModal(true)}} variant="danger"><i class="bi bi-trash"></i> Close Job Posting</Button>
                                             </Col>
                                             </Row>
                                         </Card.Body>
@@ -157,7 +157,7 @@ export default function RecruitmentHome() {
                         <Card>
                             <Card.Body>
                                 <Card.Title><h3>Looking for new talent?</h3></Card.Title>
-                                <Button className="justify-content-center align-items-center" as={Link} to="/recruitment/create" variant="primary">Create Posting</Button>
+                                <Button className="justify-content-center align-items-center" as={Link} to="/recruitment/create" variant="primary"> <i class="bi bi-person-workspace"></i> &nbsp;Create Posting</Button>
                             </Card.Body>
                         </Card>
                     </Col>
