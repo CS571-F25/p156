@@ -42,7 +42,7 @@ export default function GettingStarted() {
                         <Container>
                             <Card>
                                 <Card.Body>
-                                    <Card.Img variant="top" src={applicantgettingstarted}/>
+                                    <Card.Img variant="top" src={applicantgettingstarted} alt="a cartoon picture of multiple people standing and smiling at each other doing different things from typing, drinking coffee and talking to on another with a background showing low-fidelty job application sketches and clouds"/>
                                     <Card.Title><h2>Breathe easy</h2></Card.Title>
                                     <Card.Text>Here on ReWorkeDay all you need to do is bring yourself! We have ensured the templates used by prospective companies are not confusing and speed up your time to getting the application through the door. Our easy on the eyes design makes applying to your next dream job as easy as ever. Did we mention you won't be seeing useless repeated fields also? Yay!</Card.Text>
                                     <Card.Text>Find all the positions companies are seeking to be filled <Link to="/openroles">here</Link>, maybe try something new since you'll be done in a breeze?</Card.Text>
@@ -59,7 +59,7 @@ export default function GettingStarted() {
                         <Container>
                             <Card>
                                 <Card.Body>
-                                    <Card.Img variant="top" src={bottomline}/>
+                                    <Card.Img variant="top" src={bottomline} alt="a man looking at a computer monitor wiht an overlay showing multiple recieved job applications with images, while another man on the side is holding a tablet looking pleased with their completed job application."/>
                                     <Card.Title><h2>4 clicks. Really</h2></Card.Title>
                                     <Card.Text>Simply <Link to="/register?role=2">create your account</Link>, create a new posting, select the template and publish! Both sides of job searching in todays era is time consuming, having clear and readable forms while also managing so many active postings needs to be simple and fast.</Card.Text>
                                     <Card.Text>Your postings are completely customizable! Don't want to ask for the name first? No problem! Just move it down, or remove it! (Interesting choice, but we're here for it!). Oh, and don't think we forgot you computer-savvy recruiters, feel free to typeset to your heart's content as we have Markdown support thanks to <Link to="https://remarkjs.github.io/react-markdown/" target="_blank" rel="noopener noreferrer">react-markdown</Link>!</Card.Text>

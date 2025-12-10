@@ -34,7 +34,7 @@ function ReWorkeDayHome () {
                     <Col xs={12} md={4} className="d-flex justify-content-center mb-3">
                         <Card>
                             <Card.Body className="text-center">
-                                <Image fluid src={elegant} />
+                                <Image fluid src={elegant} alt="on the left a tablet showing a low fidelty sketch of some text and check boxes organized with folders. On the right clipboard holds a piece of paper with the same information as the computer symbolzing efficent and understandable applications"/>
                                 <Card.Title>Craft elegant and simple postings</Card.Title>
                                 <Card.Text>HR, let us take care of the user's first look at your company. We carefully plan out every application template to professionally exhibit your comittment to orderly work and efficient processes.</Card.Text>
                             </Card.Body>
@@ -44,7 +44,7 @@ function ReWorkeDayHome () {
                     <Col xs={12} md={4} className="d-flex justify-content-center mb-3">
                         <Card>
                             <Card.Body className="text-center">
-                                <Image fluid src={landingimg} />
+                                <Image fluid src={landingimg} alt="a low-medium fidelty sketch of men and women happily putting their arms in the air in an office like environment"/>
                                 <Card.Title>Apply without confusion</Card.Title>
                                 <Card.Text>Applicants, you really shouldn't have to pull your hair out over application questions, no more being asked for the 5th time if you are a student, or being told to not fill out a field that is marked as required.</Card.Text>
                             </Card.Body>
@@ -75,7 +75,7 @@ function ReWorkeDayHome () {
                     {/* Image section */}
                     <Col xs={12} md={6} className="d-flex justify-content-center align-items-center mb-3">
                         <div style={{width: "100%", maxWidth: "24rem"}}>
-                            <Image src={bottomline} fluid style={{ border: "1px solid lightgray", borderRadius: "0.6767rem" }}/>
+                            <Image alt="a cartoon picture a woman looking at a computer monitor with an overlay symbolzing the reciept of a new job application, and a man holding a tablet looking at his completed application" src={bottomline} fluid style={{ border: "1px solid lightgray", borderRadius: "0.6767rem" }}/>
                         </div>
                     </Col>
 
