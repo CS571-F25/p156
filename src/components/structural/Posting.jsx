@@ -1,12 +1,13 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card, Dropdown } from "react-bootstrap";
 import Constants from "../../Constants";
 import { Link } from "react-router"
-import { useUser } from "../contexts/SignedInStatus";
-import { db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
 import Markdown from 'react-markdown'
 
+import { useUser } from "../contexts/SignedInStatus";
+
+import { db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Posting() {
     const templates = {

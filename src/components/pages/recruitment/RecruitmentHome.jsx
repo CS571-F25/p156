@@ -1,14 +1,14 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container, Row, Col, Card, Image } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router';
-import PendingApplication from '../../structural/PendingApplication';
+import { useEffect, useState } from "react";
+import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from 'react-router';
+
 import Constants from '../../../Constants';
-import { collection, setDoc, doc, getDocs } from "firebase/firestore";
-import { app, db } from "../../../firebase"; 
+import AccessDenied from '../AccessDenied';
+
+import { db } from "../../../firebase"; 
+import { collection, getDocs } from "firebase/firestore";
 
 import { useUser } from "../../contexts/SignedInStatus";
-import AccessDenied from '../AccessDenied';
 
 export default function RecruitmentHome() {
     const { user, setUser } = useUser();

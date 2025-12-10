@@ -1,10 +1,6 @@
 import React, { memo } from "react"
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container, Card, Row, Col, Image } from "react-bootstrap";
-import { useNavigate } from 'react-router';
-import Carousel from 'react-bootstrap/Carousel';
-
-// import { ShinyText } from '../structural/ShinyText';
+import { useEffect } from "react";
+import { Container, Card, Row, Col, Image } from "react-bootstrap";
 
 import landingimg from '../../assets/landing-img-2.jpeg';
 import handshake from '../../assets/handshake.png'

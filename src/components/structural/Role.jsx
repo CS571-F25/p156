@@ -1,15 +1,12 @@
-import React from "react";
-import { Card, Col, Button, Modal, Container, Form } from "react-bootstrap";
+import { Card, Button, Modal, Container, Form } from "react-bootstrap";
 import { useState, useEffect } from "react"
 import Constants from "../../Constants";
 import Markdown from "react-markdown";
-import { db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
 import { useUser } from "../contexts/SignedInStatus";
-import { uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getStorage } from "firebase/storage";
+
+import { storage, db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL  } from "firebase/storage";
 
 export default function Role(props) {
     const [individualApplicationID] = useState(() => crypto.randomUUID());

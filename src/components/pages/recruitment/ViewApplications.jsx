@@ -1,18 +1,14 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container, Row, Col, Card, Image } from "react-bootstrap";
-import { useNavigate, Link, useParams, useSearchParams } from 'react-router';
-import PendingApplication from '../../structural/PendingApplication';
+import { useEffect, useState } from "react";
+import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
+import { useNavigate, useParams, useSearchParams } from 'react-router';
+
 import Constants from '../../../Constants';
-import { collection, setDoc, doc, getDocs } from "firebase/firestore";
-import { app, db } from "../../../firebase"; 
-import { uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../../../firebase";
-import { addDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getStorage } from "firebase/storage";
-import { useUser } from "../../contexts/SignedInStatus";
 import AccessDenied from '../AccessDenied';
 
+import { useUser } from "../../contexts/SignedInStatus";
+
+import { collection, getDocs } from "firebase/firestore";
+import { ref, db, storage, getDownloadURL } from "firebase/storage";
 
 
 export default function ViewApplications(props) {

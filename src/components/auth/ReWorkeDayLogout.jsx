@@ -1,7 +1,6 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Container, Card } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router';
+import { Link } from 'react-router';
 
 import { useUser } from '../contexts/SignedInStatus'
 

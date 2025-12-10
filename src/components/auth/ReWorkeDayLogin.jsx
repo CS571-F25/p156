@@ -1,13 +1,14 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container, Card, Row, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Card, Row, Col } from "react-bootstrap";
 import { useNavigate } from 'react-router';
-import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { getAuth, signInWithCredential, GoogleAuthProvider } from "firebase/auth";
-import { app, db, auth } from "../../firebase"; 
 import { useUser } from "../contexts/SignedInStatus";
+
+import { db, auth } from "../../firebase"; 
+import { doc, getDoc } from "firebase/firestore";
+
+import { GoogleLogin } from '@react-oauth/google';
+import { signInWithCredential, GoogleAuthProvider } from "firebase/auth";
 
 export default function ReWorkeDayLogin() {
 

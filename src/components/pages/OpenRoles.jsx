@@ -1,12 +1,10 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Col, Row, Container, Card } from "react-bootstrap";
-import { useNavigate } from 'react-router';
-import { collection, setDoc, doc, getDocs } from "firebase/firestore";
-import { app, db } from "../../firebase"; 
+import { useEffect, useState } from "react";
+import { Col, Row, Container, Card } from "react-bootstrap";
+
+import { db } from "../../firebase"; 
+import { collection, getDocs } from "firebase/firestore";
 
 import Role from "../structural/Role";
-import Constants from "../../Constants"
 
 
 export default function OpenRoles() {

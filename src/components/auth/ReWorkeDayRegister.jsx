@@ -1,11 +1,11 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Form, Container, Card, Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from 'react-router';
-import { collection, setDoc, doc, getDoc } from "firebase/firestore";
+
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { app, db } from "../../firebase"; 
 
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { getAuth, signInWithCredential, GoogleAuthProvider } from "firebase/auth";
 import { useUser } from "../contexts/SignedInStatus";
 

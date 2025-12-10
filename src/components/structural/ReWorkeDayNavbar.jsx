@@ -1,8 +1,6 @@
 import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router';
-import reactimg from '../../assets/react.svg';
+import { Button, Navbar, Container, Nav } from "react-bootstrap";
+import { Link } from 'react-router';
 import logo from '../../assets/logo_og_2.png';
 import { useUser } from "../contexts/SignedInStatus";
 

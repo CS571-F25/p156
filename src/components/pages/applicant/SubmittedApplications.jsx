@@ -1,13 +1,11 @@
-import React from 'react';
-import { useEffect, useState, useContext } from "react";
-import { Form, Button, Container, Card } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router';
-import { useUser } from "../../contexts/SignedInStatus";
+import { useEffect, useState } from "react";
 import Constants from '../../../Constants';
 import AccessDenied from '../AccessDenied';
-import { updateDoc, getDocs, collection, collectionGroup } from "firebase/firestore";
-import { app, db } from "../../../firebase"; 
 
+import { useUser } from "../../contexts/SignedInStatus";
+
+import { db } from "../../../firebase"; 
+import { getDocs, collectionGroup } from "firebase/firestore";
 
 export default function SubmittedApplications() {
 
