@@ -13,7 +13,7 @@ function AccessDenied(props) {
         <Container>
             <Card>
                 <Card.Body>
-                    <Card.Title>Oops</Card.Title>
+                    <Card.Title><h1>Oops</h1></Card.Title>
                     <Card.Text>This page is only for {props.role === Constants.Roles.Applicant ? "applicants" : "recuiters"}, please try logging in <Link to="/login">here</Link></Card.Text>
                 </Card.Body>
             </Card>

@@ -3,8 +3,8 @@ import { Carousel } from "react-bootstrap";
 
 export default function ReWorkeDayCarousel(props) {
     const [loadedImages, setLoadedImages] = useState({});
-    const jobImgs = ["welder", "consultants", "astronaut", "refs", "teacher", "waiter"]
-    const alts = ["a person is wearing a welding mask and perfoming a small weld with blue sparks coming off the work in a factory", "two consultants male and female walking down a street", "astronaut in white helment with earth behind them", "a group of referees standing in a snowy football field smiling for the camera", "a teacher pointing to writing on the chalkboard with a small group of young children", "a waiter holding a plater is smiling and guiding the POV to a seat in a dim lit restaurant"]
+    const jobImgs = ["welder", "consultants", "police", "basketball", "astronaut", "firefighter", "refs", "teacher", "waiter"]
+    const alts = ["a person is wearing a welding mask and perfoming a small weld with blue sparks coming off the work in a factory", "two consultants male and female walking down a street", "three police officers looking at a map on the truck of their cruiser pointing at locations while one is speaking on the radio", "a group of professional basketball players all from different teams standing shoulder to shoulder smiling at the camera", "astronaut in white helment with earth behind them", "a group of firefighters sitting in their fire engine smiling outside", "a group of referees standing in a snowy football field smiling for the camera", "a teacher pointing to writing on the chalkboard with a small group of young children", "a waiter holding a plater is smiling and guiding the POV to a seat in a dim lit restaurant"]
     // Preload images and mark them as loaded
 
     useEffect(() => {

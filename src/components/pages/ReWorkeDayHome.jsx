@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { Container, Card, Row, Col, Image } from "react-bootstrap";
 
 import landingimg from '../../assets/landing-img-2.jpeg';
-import handshake from '../../assets/handshake.png'
+import elegant from '../../assets/elegantpostings.png';
+import bottomline from '../../assets/bottomline2.png';
 import ReWorkeDayButton from "../structural/ReWorkeDayButton";
 import ReWorkeDayCarousel from "../structural/ReWorkeDayCarousel";
 
@@ -33,7 +34,7 @@ function ReWorkeDayHome () {
                     <Col xs={12} md={4} className="d-flex justify-content-center mb-3">
                         <Card>
                             <Card.Body className="text-center">
-                                <Image fluid src={landingimg} />
+                                <Image fluid src={elegant} />
                                 <Card.Title>Craft elegant and simple postings</Card.Title>
                                 <Card.Text>HR, let us take care of the user's first look at your company. We carefully plan out every application template to professionally exhibit your comittment to orderly work and efficient processes.</Card.Text>
                             </Card.Body>
@@ -74,7 +75,7 @@ function ReWorkeDayHome () {
                     {/* Image section */}
                     <Col xs={12} md={6} className="d-flex justify-content-center align-items-center mb-3">
                         <div style={{width: "100%", maxWidth: "24rem"}}>
-                            <Image src={handshake} fluid style={{borderRadius: "0.6767rem"}}/>
+                            <Image src={bottomline} fluid style={{ border: "1px solid lightgray", borderRadius: "0.6767rem" }}/>
                         </div>
                     </Col>
 

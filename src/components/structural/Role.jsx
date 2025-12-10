@@ -8,6 +8,7 @@ import { storage, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL  } from "firebase/storage";
 import { useNavigate, Link } from "react-router";
+import ReWorkeDayButton from "./ReWorkeDayButton";
 
 export default function Role(props) {
     const [individualApplicationID] = useState(() => crypto.randomUUID());
@@ -159,7 +160,7 @@ export default function Role(props) {
                         })}
                     </Form>
 
-                </Container> : <>
+                    </Container> : <>
                     {/* Conditional render if user is not logged in at all */}
                     <Container><Card><Card.Body><Card.Title className="text-center fw-bold">You must be logged in as an applicant to submit an application!</Card.Title><div className="d-flex justify-content-center mt-3"><Button as={Link} to="/register">Register as an applicant</Button></div></Card.Body></Card></Container>                
                 </>}
@@ -168,9 +169,13 @@ export default function Role(props) {
                 <Button variant="outline-secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit" onClick={(e) => {handleSubmitFinalApplication(e, props.postingDetails[0].position)}}>
-                    Submit!
-                </Button>
+                {
+                    user.role === "1"?
+                    <Button variant="primary" type="submit" onClick={(e) => {handleSubmitFinalApplication(e, props.postingDetails[0].position)}}>
+                        Submit!
+                    </Button>
+                    :<></>
+                }
                 </Modal.Footer>
             </Modal>
             <Card>
@@ -184,7 +189,10 @@ export default function Role(props) {
                     <Card.Text>
                         Position Type: <strong>{getEmployeeType(props.postingDetails[0].empType)}</strong>
                     </Card.Text>
-                    <Button variant="success" onClick={handleShow}>Apply!</Button>
+                    <Button variant="success" onClick={handleShow}>
+                        Apply!
+                        <i className={`bi bi-box-arrow-up-right ms-2`}/>
+                    </Button>
                 </Card.Body>
             </Card>
         </>
