@@ -75,6 +75,8 @@ export default function Role(props) {
             formValues,
             positionName: n
         })
+
+        goTo(`/applicant/home?submitted=${encodeURIComponent("true")}&submittedPositionName=${encodeURIComponent(n)}`)
     }
 
     useEffect(() => {
