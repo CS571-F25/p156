@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
-import { useNavigate, useParams, useSearchParams } from 'react-router';
+import { useParams, useSearchParams } from 'react-router';
 
 import Constants from '../../../Constants';
 import AccessDenied from '../AccessDenied';
@@ -8,12 +8,12 @@ import AccessDenied from '../AccessDenied';
 import { useUser } from "../../contexts/SignedInStatus";
 
 import { collection, getDocs } from "firebase/firestore";
-import { ref, db, storage, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../../../firebase"; 
 
 
 export default function ViewApplications(props) {
 
-    const goTo = useNavigate(); 
     const { user, setUser } = useUser();
     const [searchParams] = useSearchParams();
     const { id } = useParams();
