@@ -14,7 +14,7 @@ export default function RecruitmentHome() {
     const { user, setUser } = useUser();
 
     const [ownedApplicationResults, setOwnedApplicationResults] = useState([]);
-
+    const [fetchedApplications, setFetchedApplications] = useState([]);
 
     const handleClosePosting = () => {
 
@@ -32,7 +32,21 @@ export default function RecruitmentHome() {
             setOwnedApplicationResults(data.filter((d) => d.postingDetails[0].owner === user.uid));
         }
         fetchPosts();
+
+        // const fetchApplications = async () => {
+        //     const querySnapshot = await getDocs(collection(db, "submitted-applications"));
+        //     const data = querySnapshot.docs.map(doc => ({
+        //         id: doc.id,
+        //         ...doc.data()
+        //     }));
+        //     setFetchedApplications(data.filter((d) => {
+        //         d.formValues["XX-applicationID"] === id;
+        //     }));
+        // }
+        // fetchApplications();        
     }, [])
+
+
 
 
     return (
@@ -45,9 +59,12 @@ export default function RecruitmentHome() {
                 <Card>
                     <Card.Body>
                         <Card.Text className='fs-3'>Welcome back, {user.name.slice(0, user.name.indexOf(" "))}! <br />
-                            {true ? <>You have <span className='text-primary'>X</span> applications{/** add logic for -s */} pending review!</> 
+                            {ownedApplicationResults ? <>
+                                <span>You have {ownedApplicationResults.length} job posting{ownedApplicationResults.length == 1 ? <span></span>:<span>s</span>} live!</span>
+                            </> : <></>}
+                            {/* {true ? <>You have <span className='text-primary'>X</span> applications pending review!</> 
                             : 
-                            <>No applications are pending review, time to chill 😎</>}
+                            <>No applications are pending review, time to chill 😎</>} */}
                             
                         </Card.Text>
                     </Card.Body>
