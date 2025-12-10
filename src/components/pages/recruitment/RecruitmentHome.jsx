@@ -44,7 +44,6 @@ export default function RecruitmentHome() {
         {
         user.role == Constants.Roles.Recruiter ?
         <>
-            <Button onClick={() => {console.log(pulledData)}}>developer only</Button>
             <h1 className='display-1 text-center mb-5'>Recruiter Portal</h1>
             <Container className='mb-4'>
                 <Card>

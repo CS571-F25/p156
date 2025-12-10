@@ -167,7 +167,7 @@ export default function Posting() {
                                 <Form.Select
                                     value={empType}
                                     disabled={postingDetails.length>0}
-                                    onChange={(e) => {setEmpType(e.target.value); console.log(empType)}}
+                                    onChange={(e) => {setEmpType(e.target.value)}}
                                 >
                                     <option value="" disabled>
                                         Select an employment type
@@ -424,7 +424,6 @@ export default function Posting() {
                 <Button as={Link} to="/recruitment/home" className="me-md-3" variant="danger">Close and Delete</Button>
                 {firstStep ? <Button onClick={handlePublishPost} disabled={!canPublish && !fields.length>0} variant="success">Publish</Button> : <></>}
             </Container> 
-            <Button onClick={()=>{console.log(fields);console.log(postingDetails)}}>Print Dev Info</Button>
         </Container>
   );
 }

@@ -76,9 +76,6 @@ export default function ViewApplications(props) {
         {
         user.role == Constants.Roles.Recruiter ?
             <Container>
-                <Button onClick={() => {console.log(fetchedApplications)}}>developer only!</Button>
-                {/* <Button onClick={() => {console.log(fetchedPostingData[0].applicationFields[1].label)}}>developer only!</Button> */}
-
                 <h1>Viewing Applications for <u>{searchParams.get("position")}</u></h1>
 
                 <Container>
@@ -86,9 +83,7 @@ export default function ViewApplications(props) {
                         <Form>
                         {
                         fetchedApplications.map((appl, i) => {
-                        
                             return <Col xs={12} key={appl.id}>
-                                {/* {console.log(appl.formValues)} */}
                                 <Card className='mb-5'>
                                     <Card.Body>
                                         <Card.Title>Application Number: {appl.id}</Card.Title>

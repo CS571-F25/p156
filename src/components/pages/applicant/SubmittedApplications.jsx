@@ -40,7 +40,6 @@ export default function SubmittedApplications() {
             :
             <AccessDenied role={Constants.Roles.Applicant}/>
         }
-        <Button onClick={() => {console.log(fetchedApplications)}}>Developer info</Button>
         </>
     )
 }

@@ -41,7 +41,6 @@ export default function OpenRoles() {
                 })
                 }
             </Row>
-            {/* <Button onClick={() => console.log(postedApplications[0].id)}>Developer mode</Button> */}
         </Container>
     );
 }
