@@ -20,10 +20,6 @@ export default function RecruitmentHome() {
 
     }
 
-    const handleViewApplications = () => {
-
-    }
-
     useEffect(() => {
         document.title = "ReWorkeDay | Recruitment Home"
 
