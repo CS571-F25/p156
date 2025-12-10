@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Card, Badge } from "react-bootstrap";
 import { useParams, useSearchParams, Link } from 'react-router';
 
 import Constants from '../../../Constants';
@@ -7,7 +7,7 @@ import AccessDenied from '../AccessDenied';
 
 import { useUser } from "../../contexts/SignedInStatus";
 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../../../firebase"; 
 
@@ -20,6 +20,8 @@ export default function ViewApplications(props) {
     const [fetchedApplications, setFetchedApplications] = useState([]);
     const [fetchedPostingData, setFetchedPostingData] = useState([]);
     const [showMoreApplication, setShowMoreApplication] = useState(false);
+    const [newActionTaken, setNewActionTaken] = useState(new Date());
+    const [isLoading, setIsLoading] = useState(false);
 
     const viewUploadedFile = async (imgRefID, label) => {
         try {
@@ -34,7 +36,6 @@ export default function ViewApplications(props) {
         }
     }
 
-
     const formatDate = (a) => {
         return a.toDate().toLocaleDateString("en-US", {
             year: "numeric",
@@ -42,6 +43,59 @@ export default function ViewApplications(props) {
             day: "numeric",
         });
     }
+
+    const handleOfferPosition = async (idToReject) => {
+        setIsLoading(true);
+        try {
+            const appRef = doc(db, "submitted-applications", idToReject); 
+            await updateDoc(appRef, {
+                "formValues.status": Constants.ApplicationStatus.Accepted,
+            });
+
+            setFetchedApplications(prev =>
+            prev.map(app =>
+                app.id === idToReject
+                ? { ...app, status: Constants.ApplicationStatus.Accepted }
+                : app
+            )
+            );
+
+        } catch (err) {
+            alert("A fatal error occured when updating application status, please try again later.")
+            console.error("Error rejecting application:", err);
+        } finally {
+            setShowMoreApplication(false);
+            setNewActionTaken(new Date());
+            setIsLoading(false);
+        }
+    }
+
+    const handleRejectApplication = async (idToReject) => {
+        setIsLoading(true);
+        try {
+            const appRef = doc(db, "submitted-applications", idToReject); 
+            await updateDoc(appRef, {
+                "formValues.status": Constants.ApplicationStatus.Rejected,
+            });
+
+            setFetchedApplications(prev =>
+            prev.map(app =>
+                app.id === idToReject
+                ? { ...app, status: Constants.ApplicationStatus.Rejected }
+                : app
+            )
+            );
+
+        } catch (err) {
+            alert("A fatal error occured when updating application status, please try again later.")
+            console.error("Error rejecting application:", err);
+        } finally {
+            setShowMoreApplication(false);
+            setNewActionTaken(new Date());
+            setIsLoading(false);
+        }
+    };
+
 
     useEffect(() => {
         document.title = `ReWorkeDay | Applications for ${searchParams.get("position")}`;
@@ -64,15 +118,22 @@ export default function ViewApplications(props) {
             setFetchedPostingData(data.filter((d) => d.id === id));
         }
         fetchPostingData();        
-    }, []);
+    }, [newActionTaken]);
 
+
+    const getStatusType = (v) => {
+        if (v === Constants.ApplicationStatus.Accepted) { return ["Offer", "success"] }
+        else if (v === Constants.ApplicationStatus.Rejected) { return ["Application Rejected", "danger"] }
+        else if (v === Constants.ApplicationStatus.UnderReview) { return ["Under Review", "primary"] }
+        else { return ["Unknown status - contact employer", "warning"]}
+    }
 
     return (
         <>
         {
         user.role == Constants.Roles.Recruiter ?
             <Container>
-                <Button className="my-3" as={Link} to="/recruitment/home">Back</Button>
+                <Button disabled={isLoading} className="my-3" as={Link} to="/recruitment/home">Back</Button>
                 <h1>Viewing Applications for <u>{searchParams.get("position")}</u></h1>
                 {fetchedApplications.length>0 ?
                 <Container>
@@ -85,6 +146,7 @@ export default function ViewApplications(props) {
                                 <Card className='mb-5'>
                                     <Card.Body>
                                         <Card.Title>Application Number: <u className="font-monospace">{appl.id}</u></Card.Title>
+                                        <Badge className="mb-3" bg={getStatusType(appl.formValues.status)[1]}><span>{getStatusType(appl.formValues.status)[0]}</span></Badge>                                        
                                         { fetchedPostingData.map((postD) => (
                                             postD.applicationFields.map((f, i) => {
                                                 const label = postD.applicationFields[i].label;
@@ -104,7 +166,7 @@ export default function ViewApplications(props) {
                                                     return (
                                                         <Form.Group className="mb-3" key={i}>
                                                             <Form.Label>{label}{required ? <span className="text-danger"> *</span> : <></>}</Form.Label><br></br>
-                                                            <Button onClick={() => viewUploadedFile(appl.id, label)}>View Uploaded File</Button>
+                                                            <Button disabled={isLoading} onClick={() => viewUploadedFile(appl.id, label)}>View Uploaded File</Button>
                                                             {/* <Form.Control className="mb-3" readOnly disabled value={getFileURL(appl.id, label)} type={"text"} required={required}/> */}
                                                         </Form.Group>
                                                     );                                                    
@@ -118,17 +180,37 @@ export default function ViewApplications(props) {
                                                 }    
                                                 })
                                         ))}
-                                        <Button variant="outline-primary" onClick={() => setShowMoreApplication(false)}>Minimize application</Button>
+                                        
+                                        <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(false)}>Minimize application</Button>
+                                        <Container className="text-end d-flex justify-content-end gap-3 mt-5">
+                                            <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application</Button>
+                                            <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position</Button>
+                                        </Container>
+                                        <Container className="text-end mt-3 d-flex align-items-center justify-content-end">
+                                            <span className="me-2">Current Status:</span>
+                                            <Badge className="mb-0" bg={getStatusType(appl.formValues.status)[1]}>
+                                                <span>{getStatusType(appl.formValues.status)[0]}</span>
+                                            </Badge>
+                                        </Container>
+
                                     </Card.Body> 
                                     <Card.Footer className='text-end text-muted'>{appl.id}</Card.Footer>
+                                    
                                 </Card>
                                 :
                                 <Card>
                                     <Card.Body>
                                         <Card.Title>Application Number: <u className="font-monospace">{appl.id}</u></Card.Title>
                                         <Card.Subtitle>Submitted on: {formatDate(appl.formValues["XX-submittedTimeStamp"])}</Card.Subtitle>
-                                        <Button className="mt-2" onClick={() => setShowMoreApplication(true)}>Read entire application</Button>
+                                        Current Status: &nbsp;&nbsp;<Badge bg={getStatusType(appl.formValues.status)[1]}><span>{getStatusType(appl.formValues.status)[0]}</span></Badge>
                                     </Card.Body>
+                                    <Card.Footer>
+                                        <Container className="text-end d-flex justify-content-end gap-3">
+                                            <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(true)}>Read entire application</Button>
+                                            <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application</Button>
+                                            <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position</Button>
+                                        </Container>
+                                    </Card.Footer>
                                 </Card>
                                 }
                             </Col>

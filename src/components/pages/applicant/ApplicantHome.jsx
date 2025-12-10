@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Card, Toast, ToastContainer } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Toast, ToastContainer, Badge } from "react-bootstrap";
 import Constants from '../../../Constants';
 import AccessDenied from '../AccessDenied';
 
@@ -23,7 +23,6 @@ export default function ApplicantHome() {
     useEffect(() => {
         document.title = "ReWorkeDay | Applicant Home";
 
-
         const fetchApplications = async () => {
             const querySnapshot = await getDocs(collection(db, "submitted-applications"));
             const data = querySnapshot.docs.map(doc => ({
@@ -37,10 +36,10 @@ export default function ApplicantHome() {
     }, []);
 
     const getStatusType = (v) => {
-        if (v === Constants.ApplicationStatus.Accepted) { return ["Offer", "text-success"] }
-        else if (v === Constants.ApplicationStatus.Rejected) { return ["Application Rejected", "text-danger"] }
-        else if (v === Constants.ApplicationStatus.UnderReview) { return ["Under Review", ""] }
-        else { return ["Unknown status - contact employer", "text-warning"]}
+        if (v === Constants.ApplicationStatus.Accepted) { return ["Offer", "success"] }
+        else if (v === Constants.ApplicationStatus.Rejected) { return ["Application Rejected", "danger"] }
+        else if (v === Constants.ApplicationStatus.UnderReview) { return ["Under Review", "primary"] }
+        else { return ["Unknown status - contact employer", "warning"]}
     }
 
     const formattedDate = (a) => {
@@ -74,7 +73,7 @@ export default function ApplicantHome() {
                                     <Card.Body>
                                         <Card.Text>Position: {app.positionName}</Card.Text>
                                         <Card.Text>Job ID: <span className="text-muted">({app.id})</span></Card.Text>
-                                        <Card.Text className="text-end"><span className={getStatusType(app.formValues.status)[1]}>{getStatusType(app.formValues.status)[0]}</span></Card.Text>
+                                        <Badge bg={getStatusType(app.formValues.status)[1]} className="text-end"><span>{getStatusType(app.formValues.status)[0]}</span></Badge>
                                     </Card.Body>
                                     <Card.Footer className="text-end">
                                         Submitted on {formattedDate(app.formValues["XX-submittedTimeStamp"])}
