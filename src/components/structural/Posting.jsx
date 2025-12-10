@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card, Dropdown } from "react-bootstrap";
 import Constants from "../../Constants";
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import Markdown from 'react-markdown'
 
 import { useUser } from "../contexts/SignedInStatus";
@@ -54,6 +54,8 @@ export default function Posting() {
 
     const { user, setUser } = useUser();
 
+    const goTo = useNavigate();
+
     const [fields, setFields] = useState([]);
     const [postingDetails, setPostingDetails] = useState([]);
 
@@ -100,6 +102,8 @@ export default function Posting() {
             postingDetails,
             applicationFields: fields
         });
+
+        goTo("/recruitment/home?posted=true");
     };
 
     const getEmployeeType = (v) => {

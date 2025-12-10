@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
-import { Link } from 'react-router';
+import { Button, Container, Row, Col, Card, Toast, ToastContainer} from "react-bootstrap";
+import { Link, useSearchParams } from 'react-router';
 
 import Constants from '../../../Constants';
 import AccessDenied from '../AccessDenied';
@@ -13,6 +13,8 @@ import { useUser } from "../../contexts/SignedInStatus";
 export default function RecruitmentHome() {
     const { user, setUser } = useUser();
 
+    const [searchParams] = useSearchParams();
+    const [posted, setShowToast] = useState(searchParams.get("posted"));
     const [ownedApplicationResults, setOwnedApplicationResults] = useState([]);
     const [fetchedApplications, setFetchedApplications] = useState([]);
 
@@ -54,6 +56,18 @@ export default function RecruitmentHome() {
         {
         user.role == Constants.Roles.Recruiter ?
         <>
+            { posted ?
+            <ToastContainer className="me-5 mb-5" style={{zIndex: 1}}position="bottom-end">
+                <Toast bg="success" onClose={() => setShowToast(false)} show={posted} delay={6767} autohide>
+                    <Toast.Header>
+                        {/* <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" /> */}
+                        <strong className="me-auto">Success!</strong>
+                        <small>Just now</small>
+                    </Toast.Header>
+                    <Toast.Body>We have successfully recieved your new post and it is now available in the open jobs page.</Toast.Body>
+                </Toast>
+            </ToastContainer>
+            : <></>}
             <h1 className='display-1 text-center mb-5'>Recruiter Portal</h1>
             <Container className='mb-4'>
                 <Card>
@@ -70,6 +84,7 @@ export default function RecruitmentHome() {
                     </Card.Body>
                 </Card>
             </Container>
+            
             <Container className='d-flex flex-grow-1 justify-content-center mb-5'>
                 <Row>
                     <Row><h2 className='fst-italic'>Jump back in</h2></Row>
