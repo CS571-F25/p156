@@ -10,8 +10,8 @@ function ReWorkeDayToolTip(props) {
 
     return (
         <OverlayTrigger placement="top" delay={{ show: 100, hide: 267 }} overlay={renderToolTip(props.description)}>
-            <Button style={{all: "unset"}}>
-                <i className="bi bi-info-circle"></i>
+            <Button aria-label="More information tooltip" style={{all: "unset"}}>
+                <i aria-hidden="true" className="bi bi-info-circle"></i>
             </Button>
         </OverlayTrigger>
     );
