@@ -185,8 +185,8 @@ export default function ViewApplications(props) {
                                         
                                         <Button disabled={isLoading} variant="outline-primary" onClick={() => setShowMoreApplication(false)}><i class="bi bi-chevron-up"></i>&nbsp;Minimize application</Button>
                                         <Container className="text-end d-flex justify-content-end gap-3 mt-5">
-                                            <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application</Button>
-                                            <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position</Button>
+                                            <Button disabled={isLoading} variant="warning" onClick={() => handleRejectApplication(appl.id)}>Reject Application <i class="bi bi-ban"></i></Button>
+                                            <Button disabled={isLoading} variant="success" onClick={() => handleOfferPosition(appl.id)}>Offer Position <i class="bi bi-person-check-fill"></i></Button>
                                         </Container>
                                         <Container className="text-end mt-3 d-flex align-items-center justify-content-end">
                                             <span className="me-2">Current Status:</span>
